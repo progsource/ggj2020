@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://packed/hud/Money.tscn" type="PackedScene" id=1]
+
+[node name="HudProgress" type="Node2D"]
+position = Vector2( 0, 270 )
+
+[node name="Money" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -30 )
