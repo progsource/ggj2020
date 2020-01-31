@@ -1,7 +1,7 @@
 # TODO repair overcooked
 
 - [ ] Find a game title
-- [ ] find starting assets pixelart
+- [x] find starting assets pixelart
 - [ ] HUD
   - [ ] start button
   - [ ] highscore (display money, how many items repaired, start next level button)
