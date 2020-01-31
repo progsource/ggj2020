@@ -1,6 +1,6 @@
 # TODO repair overcooked
 
-- [ ] Find a game title
+- [x] Find a game title
 - [x] find starting assets pixelart
 - [ ] HUD
   - [ ] start button

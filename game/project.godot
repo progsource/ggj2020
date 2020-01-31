@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="ggj2020"
+config/name="Fix it or bust"
 run/main_scene="res://scenes/Level0.tscn"
 config/icon="res://icon.png"
 
