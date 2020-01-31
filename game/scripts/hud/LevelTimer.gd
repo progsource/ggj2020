@@ -2,25 +2,24 @@ extends Sprite
 
 signal level_ended
 
-var leftTime = 60
+export var time_per_level : int = 120
+var left_time : int = 0
 
 func _ready():
-	#connect("timeout", $Timer, "_on_timer_timeout")
 	pass
 
 func _process(delta):
 	pass
 
-
 func _on_StartButton_start_button_pressed():
-	$Label.text = get_time_as_time_string(leftTime)
+	$Label.text = get_time_as_time_string(left_time)
+	left_time = time_per_level
 	$Timer.start()
 
-
 func _on_Timer_timeout():
-	leftTime -= 1
-	$Label.text = get_time_as_time_string(leftTime)
-	if leftTime == 0:
+	left_time -= 1
+	$Label.text = get_time_as_time_string(left_time)
+	if left_time == 0:
 		$Timer.stop()
 		emit_signal("level_ended")
 
