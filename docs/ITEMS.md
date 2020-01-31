@@ -5,7 +5,6 @@
 **Materials**
 * Cable
 
-
 ## Mobile phone
 
 **Materials**
