@@ -24,3 +24,8 @@ A Global Game Jam project
   - Not for redistribution or resale as an asset.
   - It can be used for game development and other productions.
   ```
+
+
+## For later reading pleasure
+
+ - https://www.gdquest.com/tutorial/game-design/godot/30-days-free-game-creation-tutorial/
