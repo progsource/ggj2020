@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "CustomerData",
+"language": "GDScript",
+"path": "res://scripts/customer/CustomerData.gd"
+}, {
+"base": "Reference",
 "class": "Device",
 "language": "GDScript",
 "path": "res://scripts/tasks/Device.gd"
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://scripts/tasks/Task.gd"
 } ]
 _global_script_class_icons={
+"CustomerData": "",
 "Device": "",
 "Requirement": "",
 "StartButton": "",

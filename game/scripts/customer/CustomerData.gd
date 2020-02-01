@@ -1,5 +1,7 @@
 extends Reference
 
+class_name CustomerData
+
 const sprites = [
 	"res://assets/img/pipoya/Male/Male 01-1.png",
 	"res://assets/img/pipoya/Male/Male 01-2.png",
