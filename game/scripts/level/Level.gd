@@ -10,6 +10,7 @@ onready var devices_packed = preload("res://packed/items/Items.tscn")
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("new_task_added", get_node("HUD/TaskList"), "_on_Task_recieved")
+# warning-ignore:return_value_discarded
 	get_node("HUD/LevelTimer").connect("level_ended", self, "stop")
 	# warning-ignore:return_value_discarded
 	$CustomerSpawnTimer.connect("timeout", self, "_on_customer_spawn_timer_timeout")
@@ -18,6 +19,7 @@ func _ready():
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_pressed("take_action"):
 		$Player.hold_item(9)
