@@ -1,12 +1,11 @@
 extends Reference
 
+class_name LevelData
+
 var isRunning : bool = false
 var money : int = 0
 var happiness : int = 0
 var customer_slots := {}
-
-# either spawn them in this class or inside of Level.gd (which still needs to be created)
-var spawn_customer = preload("res://packed/character/Customer.tscn")
 
 # TODO set positions to correct places on screen
 const customer_slot_positions = [

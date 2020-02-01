@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://scripts/tasks/Device.gd"
 }, {
 "base": "Reference",
+"class": "LevelData",
+"language": "GDScript",
+"path": "res://scripts/level/LevelData.gd"
+}, {
+"base": "Reference",
 "class": "Requirement",
 "language": "GDScript",
 "path": "res://scripts/tasks/Requirement.gd"
@@ -37,6 +42,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CustomerData": "",
 "Device": "",
+"LevelData": "",
 "Requirement": "",
 "StartButton": "",
 "Task": ""
