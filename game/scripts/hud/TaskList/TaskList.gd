@@ -38,8 +38,8 @@ func _on_Task_recieved(task):
 		card.position = pos
 
 	card.connect("remove_card", self, "_on_TaskCard_remove_card")
-	card.get_child(1).time_for_item = rand_range(6, 6)
-	print("Time for Item " + str(card.get_child(1).time_for_item))
+	card.get_child(2).time_for_item = rand_range(6, 6)
+	print("Time for Item " + str(card.get_child(2).time_for_item))
 	add_child(card)
 
 func _on_TaskCard_remove_card(node):

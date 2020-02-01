@@ -2,6 +2,6 @@ extends Reference
 
 class_name Requirement
 
-enum RequirementType {SCREWS, DISPLAY, FIRE, CLEANING, EMPTY}
+enum RequirementType {SCREWS = 9, DISPLAY = 10, FIRE = 11, CLEANING = 12, EMPTY = -1}
 
 var requirement_index : int = RequirementType.EMPTY
