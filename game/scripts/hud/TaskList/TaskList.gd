@@ -21,9 +21,18 @@ func _process(delta):
 		timer_raw = 0
 
 func _on_Task_recieved(task):
-	print("Recieved Task " + task)
+	var list = get_child_count()
 	var card = taskCard.instance()
 	card.name = task
+	
+	if list > 1:
+		var lastTask = get_child(list - 1)
+		var pos = Vector2(
+			lastTask.position.x + 50,
+			lastTask.position.y
+		)
+		card.position = pos
+
 	card.connect("remove_card", self, "_on_TaskCard_remove_card")
 	card.get_child(1).time_for_item = rand_range(3, 9)
 	print("Time for Item " + str(card.get_child(1).time_for_item))
