@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/img/dungeon_pack/character and tileset/dungeon_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://packed/level0/AssembleStation.tscn" type="PackedScene" id=2]
 [ext_resource path="res://packed/level0/Counter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://packed/level0/WashMachine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://packed/level0/WeldingStation.tscn" type="PackedScene" id=5]
 
 [node name="Room0" type="Node2D"]
 
@@ -66,3 +68,9 @@ position = Vector2( 144, 48 )
 scale = Vector2( 2, 2 )
 has_vertical_sprite = true
 has_mirrored_sprite = true
+
+[node name="WashMachine" parent="." instance=ExtResource( 4 )]
+position = Vector2( 432, 176 )
+
+[node name="WeldingStation" parent="." instance=ExtResource( 5 )]
+position = Vector2( 144, 240 )
