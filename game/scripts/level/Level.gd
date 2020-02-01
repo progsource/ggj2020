@@ -16,6 +16,7 @@ func _ready():
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
 
+
 func _on_start_button_pressed():
 	start()
 

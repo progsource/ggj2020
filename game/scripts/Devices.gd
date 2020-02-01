@@ -1,30 +1,41 @@
 extends Node2D
 
-var devices = {}
+var items = {}
 
-enum DeviceType {Calculator, OldCamera, Controller, Headphones, Monitor, MusicPlayer, Notebook, OldMonitor, Phone}
+enum ItemType {
+	Calculator, OldCamera, Controller, Headphones, Monitor, MusicPlayer, Notebook, OldMonitor, Phone,
+	Screw, Displays,
+	MetalTable, WashMachine
+}
 
+const DEVICE_AMOUNT : int = 9
 
 func _ready():
-	devices[DeviceType.Calculator] = $Calculator
-	devices[DeviceType.OldCamera] = $Camera
-	devices[DeviceType.Controller] = $Controller
-	devices[DeviceType.Headphones] = $Headphones
-	devices[DeviceType.Monitor] = $Monitor
-	devices[DeviceType.MusicPlayer] = $MusicPlayer
-	devices[DeviceType.Notebook] = $Notebook
-	devices[DeviceType.OldMonitor] = $OldMonitor
-	devices[DeviceType.Phone] = $Phone
+	items[ItemType.Calculator] = $Calculator
+	items[ItemType.OldCamera] = $Camera
+	items[ItemType.Controller] = $Controller
+	items[ItemType.Headphones] = $Headphones
+	items[ItemType.Monitor] = $Monitor
+	items[ItemType.MusicPlayer] = $MusicPlayer
+	items[ItemType.Notebook] = $Notebook
+	items[ItemType.OldMonitor] = $OldMonitor
+	items[ItemType.Phone] = $Phone
+	items[ItemType.Screw] = $Screw
+	items[ItemType.Displays] = $Displays
+	items[ItemType.MetalTable] = $MetalTable
+	items[ItemType.WashMachine] = $WashMachine
 
-	for i in range(0, devices.size()):
-		devices[i].visible = false
+	for i in range(0, items.size()):
+		items[i].visible = false
 
 
-func display(var device_type : int):
-	devices[device_type].visible = true
-	var current_height = devices[device_type].texture.get_height()
-	var wanted_heigth : float = 20
-	var scale = wanted_heigth / current_height
-	devices[device_type].scale.x = scale
-	devices[device_type].scale.y = scale
+func display(var item_type : int):
+	items[item_type].visible = true
+	
+	if item_type < DEVICE_AMOUNT:
+		var current_height = items[item_type].texture.get_height()
+		var wanted_heigth : float = 16
+		var scale = wanted_heigth / current_height
+		items[item_type].scale.x = scale
+		items[item_type].scale.y = scale
 
