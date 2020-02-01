@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://packed/hud/TaskList/TaskItem/TaskItem.tscn" type="PackedScene" id=1]
 [ext_resource path="res://packed/hud/TaskList/TaskItem/TaskTimer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/hud/TaskList/TaskCard.gd" type="Script" id=3]
 
 [node name="TaskCard" type="Node2D"]
+script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": "Manages a Task
 
@@ -23,3 +25,5 @@ Trackes
 
 [node name="TaskTimer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 50 )
+time_for_item = 10
+[connection signal="task_expired" from="TaskTimer" to="." method="_on_TaskTimer_task_expired"]
