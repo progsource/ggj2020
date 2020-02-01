@@ -40,7 +40,7 @@ A Global Game Jam project
   - Not for redistribution or resale as an asset.
   - It can be used for game development and other productions.
   ```
-
+* game/assets/img/dungeon_pack -> https://pixel-poem.itch.io/dungeon-assetpuck
 
 ## For later reading pleasure
 
