@@ -27,7 +27,7 @@ func _physics_process(delta):
 	move_and_collide(movement)
 	
 	#if !attack_playing:
-		#animate_player(direction)
+	animate_player(direction)
 		
 	#if direction != Vector2.ZERO:
 	#	$RayCast2D.cast_to = direction.normalized() * 8
@@ -35,16 +35,20 @@ func _physics_process(delta):
 func _on_start_button_pressed():
 	can_move = true
 
-#func animate_player(direction: Vector2):
-#	pass
-	#if direction != Vector2.ZERO:
-	#	last_direction = 0.5 * (last_direction + direction)
+func animate_player(direction: Vector2):
+	if direction != Vector2.ZERO:
+		last_direction = 0.5 * (last_direction + direction)
 		
-	#	var animation = get_animation_direction(last_direction) + "_walk"
-		
-	#	$Sprite.frames.set_animation_speed(animation, 2 + 8 * direction.length())
-	#	$Sprite.play(animation)
-	#else:
-	#	var animation = get_animation_direction(last_direction) + "_idle"
-	#	$Sprite.play(animation)
-
+		var animation = "player_" + get_animation_direction(last_direction)
+		$AnimationPlayer.play(animation)
+	else:
+		$AnimationPlayer.stop()
+		var current_frame = $Sprite.frame
+		if current_frame < 3:
+			$Sprite.frame = 1
+		elif current_frame < 6:
+			$Sprite.frame = 4
+		elif current_frame < 9:
+			$Sprite.frame = 7
+		else:
+			$Sprite.frame = 10

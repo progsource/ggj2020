@@ -1,24 +1,73 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/img/pipoya/Female/Female 01-1.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/pipoya/Female/Female 12-4.png" type="Texture" id=1]
 [ext_resource path="res://scripts/character/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.2078, 15.5923 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "player_up"
+[sub_resource type="Animation" id=3]
+resource_name = "player_down"
+length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "player_left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "player_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 7, 8 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "player_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 9, 10, 11 ]
 }
 
 [node name="Player" type="KinematicBody2D"]
@@ -29,11 +78,16 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 32, 0, 32, 32 )
+vframes = 4
+hframes = 3
+frame = 5
+region_rect = Rect2( 32, 96, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/player_down = SubResource( 3 )
+anims/player_left = SubResource( 4 )
+anims/player_right = SubResource( 5 )
 anims/player_up = SubResource( 2 )
