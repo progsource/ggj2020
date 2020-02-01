@@ -54,6 +54,11 @@ func hold_item(var item_index : int):
 	held_item = item_index
 
 func drop_item():
-	$Items.hide_item()
+	$Items.hide_items()
+	$ItemAnimation.stop()
+	held_item = -1
+
+func explode_item():
+	$Items.explode()
 	$ItemAnimation.stop()
 	held_item = -1

@@ -27,6 +27,7 @@ func _process(delta):
 				$Player.hold_item(9)
 			elif $Player.held_item == 9:
 				$Player.drop_item()
+				#$Player.explode_item()
 		elif $Room0/DisplayCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
 				$Player.hold_item(10)

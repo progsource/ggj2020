@@ -1,5 +1,7 @@
 extends Node2D
 
+signal item_exploded
+
 var items = {}
 
 enum ItemType {
@@ -25,11 +27,16 @@ func _ready():
 	items[ItemType.MetalTable] = $MetalTable
 	items[ItemType.WashMachine] = $WashMachine
 
-	hide_item()
+	hide_items()
 
+func _process(delta):
+	if $Explosion.frame == 7:
+		$Explosion.stop()
+		hide_items()
+		$Explosion.frame = 0
 
 func display(var item_type : int):
-	hide_item()
+	hide_items()
 	items[item_type].visible = true
 	
 	if item_type < DEVICE_AMOUNT:
@@ -39,6 +46,10 @@ func display(var item_type : int):
 		items[item_type].scale.x = scale
 		items[item_type].scale.y = scale
 
-func hide_item() -> void :
+func hide_items() -> void :
 	for i in range(0, items.size()):
 		items[i].visible = false
+
+func explode() -> void :
+	$Explosion.play("default")
+	
