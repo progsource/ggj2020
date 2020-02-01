@@ -1,6 +1,6 @@
 extends Node2D
 
-signal item_exploded
+#signal item_exploded
 
 var items = {}
 var customer_data: CustomerData = null
@@ -41,8 +41,8 @@ func _process(delta):
 
 	if customer_data == null:
 		return
-	#if customer_data.task.taskFailed:
-		#queue_free()
+	if customer_data.task.taskFailed:
+		queue_free()
 
 func display(var item_type : int):
 	hide_items()

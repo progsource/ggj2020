@@ -38,15 +38,21 @@ func _process(delta):
 		if $Room0/Counter/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1 && level_data.customer_slots[0] && level_data.customer_slots[0].customer_data:
 				var item_index = level_data.customer_slots[0].customer_data.task.device.sprite_index
-				level_data.customer_slots[0].customer_data.task.taskStarted = true
+				#level_data.customer_slots[0].customer_data.task.taskStarted = true
 				$Player.hold_item(item_index)
 				emit_signal("item_picked_up", 0)
-		elif $Room0/Counter2/Area2D.overlaps_body($Player):
+		elif $Room0/Counter3/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1 && level_data.customer_slots[1] && level_data.customer_slots[1].customer_data:
 				var item_index = level_data.customer_slots[1].customer_data.task.device.sprite_index
-				level_data.customer_slots[1].customer_data.task.taskStarted = true
+				#level_data.customer_slots[1].customer_data.task.taskStarted = true
 				$Player.hold_item(item_index)
 				emit_signal("item_picked_up", 1)
+		elif $Room0/Counter5/Area2D.overlaps_body($Player):
+			if $Player.held_item == -1 && level_data.customer_slots[2] && level_data.customer_slots[2].customer_data:
+				var item_index = level_data.customer_slots[2].customer_data.task.device.sprite_index
+				#level_data.customer_slots[2].customer_data.task.taskStarted = true
+				$Player.hold_item(item_index)
+				emit_signal("item_picked_up", 2)
 
 
 func _on_start_button_pressed():

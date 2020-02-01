@@ -5,7 +5,7 @@
 [ext_resource path="res://packed/items/Items.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.2078, 11.1263 )
+extents = Vector2( 8.50258, 11.1263 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "player_down"
@@ -111,7 +111,6 @@ anims/player_right = SubResource( 4 )
 anims/player_up = SubResource( 5 )
 
 [node name="Items" parent="." instance=ExtResource( 3 )]
-visible = false
 position = Vector2( 0, -20 )
 
 [node name="ItemAnimation" type="AnimationPlayer" parent="."]

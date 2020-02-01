@@ -49,16 +49,20 @@ func animate_player(direction: Vector2):
 
 
 func hold_item(var item_index : int):
+	print("hold item %d" % item_index)
+	assert($Items)
 	$Items.display(item_index)
 	$ItemAnimation.play("item_hover")
 	held_item = item_index
 
 func drop_item():
+	print("drop item")
 	$Items.hide_items()
 	$ItemAnimation.stop()
 	held_item = -1
 
 func explode_item():
+	print("explode")
 	$Items.explode()
 	$ItemAnimation.stop()
 	held_item = -1
