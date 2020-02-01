@@ -17,10 +17,13 @@ func _ready():
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
 
 func _process(delta):
-	if Input.is_action_pressed("take_action"):
-		$Player.hold_item(9)
-	else:
-		$Player.drop_item()
+	if Input.is_action_just_released("take_action"):
+		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
+			if $Player.held_item == -1:
+				$Player.hold_item(9)
+			elif $Player.held_item == 9:
+				$Player.drop_item()
+
 
 func _on_start_button_pressed():
 	start()
@@ -37,7 +40,6 @@ func _spawn_customer() -> void :
 	var customer_slot = level_data.get_next_free_slot()
 	customer_slot.customer_data = CustomerData.new()
 	customer_slot.customer_data.init_random_values()
-	print("%d:%d" % [customer_slot.position.x, customer_slot.position.y])
 
 	var customer = spawn_customer_packed.instance()
 	customer.position = customer_slot.position

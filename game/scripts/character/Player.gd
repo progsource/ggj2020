@@ -1,6 +1,7 @@
 extends "res://scripts/character/Character.gd"
 
 var can_move : bool = false
+var held_item : int = -1
 
 func _ready():
 	var start_button : StartButton = get_tree().root.get_node("Level/HUD/StartButton")
@@ -50,7 +51,9 @@ func animate_player(direction: Vector2):
 func hold_item(var item_index : int):
 	$Items.display(item_index)
 	$ItemAnimation.play("item_hover")
+	held_item = item_index
 
 func drop_item():
 	$Items.hide_item()
 	$ItemAnimation.stop()
+	held_item = -1
