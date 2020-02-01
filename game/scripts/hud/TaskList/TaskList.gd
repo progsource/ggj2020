@@ -34,7 +34,7 @@ func _on_Task_recieved(task):
 		card.position = pos
 
 	card.connect("remove_card", self, "_on_TaskCard_remove_card")
-	card.get_child(1).time_for_item = rand_range(3, 9)
+	card.get_child(1).time_for_item = rand_range(6, 6)
 	print("Time for Item " + str(card.get_child(1).time_for_item))
 	add_child(card)
 
@@ -50,5 +50,22 @@ func _on_TaskCard_remove_card(node):
 
 # warning-ignore:unused_argument
 func TweenComplete(object, key):
-	print('Removing Node ' + object.name)
-	remove_child(object)
+	match str(key):
+		":modulate:a":
+			print('Removing Node ' + object.name)
+			remove_child(object)
+			move_Tasks()
+
+func move_Tasks():
+	for node in self.get_children():
+		if node.get_filename() == taskCard.get_path():
+			tween.interpolate_property(
+				node,
+				"position:x",
+				node.position.x,
+				node.position.x - 50,
+				1,
+				Tween.TRANS_CUBIC,
+				Tween.EASE_IN_OUT
+			)
+			tween.start()
