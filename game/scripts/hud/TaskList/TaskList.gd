@@ -27,6 +27,7 @@ func _on_Task_recieved(task):
 	var list = get_child_count()
 	var card = taskCard.instance()
 	card.name = str(task)
+	card.task = task
 	
 	if list > 1:
 		var lastTask = get_child(list - 1)
