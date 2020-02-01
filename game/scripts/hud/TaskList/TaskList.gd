@@ -20,25 +20,13 @@ func _on_LevelTimer_level_ended():
 	isRunning = false
 	clear_child_list()
 
-func _process(delta):
-	if !isRunning:
-		return
-	
-	timer_raw += delta
-	timer = round(timer_raw)
-	
-	if timer > 2:
-		_on_Task_recieved("test " + str(count))
-		count += 1
-		timer_raw = 0
-
 func _on_Task_recieved(task):
 	if !isRunning:
 		return
 
 	var list = get_child_count()
 	var card = taskCard.instance()
-	card.name = task
+	card.name = str(task)
 	
 	if list > 1:
 		var lastTask = get_child(list - 1)

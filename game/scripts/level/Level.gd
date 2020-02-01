@@ -1,12 +1,14 @@
 extends Node2D
 
-signal new_task_added
+signal new_task_added(task)
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
 
 
 func _ready():
+	# warning-ignore:return_value_discarded
+	connect("new_task_added", get_node("HUD/TaskList"), "_on_Task_recieved")
 	# warning-ignore:return_value_discarded
 	$CustomerSpawnTimer.connect("timeout", self, "_on_customer_spawn_timer_timeout")
 	var start_button : StartButton = get_tree().root.get_node("Level/HUD/StartButton")
@@ -35,7 +37,7 @@ func _spawn_customer() -> void :
 	customer.position = customer_slot.position
 	customer.get_node("Sprite").texture = customer_slot.customer_data.sprites[customer_slot.customer_data.sprite_index]
 	add_child(customer)
-	emit_signal("new_task_added")
+	emit_signal("new_task_added", customer_slot.customer_data.task)
 
 func _on_customer_spawn_timer_timeout():
 	if level_data.has_free_customer_slot():
