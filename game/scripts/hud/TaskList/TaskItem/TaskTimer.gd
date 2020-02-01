@@ -13,7 +13,8 @@ func _ready():
 	$Timer.start()
 
 func _on_Timer_timeout():
-	left_time -= 1
+	if !$Timer.paused:
+		left_time -= 1
 	# warning-ignore:integer_division
 	$ProgressBar.value = left_time * 100 / time_for_item
 	if left_time == 0:
