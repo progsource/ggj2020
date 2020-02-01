@@ -228,10 +228,13 @@ func init_random_values() -> void:
 	sprite_index = rng.randi_range(0, sprites.size())
 	task = Task.new()
 	task.device = Device.new()
-	task.device.sprite_index = int(rand_range(0, 4)) # TODO: do this based on available device types
+	task.device.sprite_index = rng.randi_range(0, 8) # TODO: do this based on available device types
 	var requirements_count = rng.randi_range(0, 4)
 	for _i in range(requirements_count):
-		task.requirements.push_back(rand_range(0, 4))
+		task.requirements.push_back(rng.randi_range(9, 12))
 	base_money = rng.randi_range(2, 14)
-	max_pickup_waiting_time_in_seconds = rng.randi_range(20, 120)
-	max_shipment_time_in_seconds = rng.randi_range(40, 180)
+	var time = rng.randi_range(8, 12)
+	task.waitingTime = time
+	task.reward = base_money
+	max_pickup_waiting_time_in_seconds = time
+	max_shipment_time_in_seconds = time
