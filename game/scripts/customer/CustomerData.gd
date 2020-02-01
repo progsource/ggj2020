@@ -213,6 +213,8 @@ const sprites = [
 	preload("res://assets/img/pipoya/Female/Female 25-1.png"),
 ]
 
+var rng = RandomNumberGenerator.new()
+
 var sprite_index : int = 0
 var task : Task = null
 var base_money : int = 0
@@ -220,13 +222,16 @@ var max_pickup_waiting_time_in_seconds : int = 0
 var max_shipment_time_in_seconds : int = 0
 
 func init_random_values() -> void:
-	sprite_index = randi() % sprites.size()
+	rng.seed = OS.get_ticks_msec()
+	rng.randomize()
+
+	sprite_index = rng.randi_range(0, sprites.size())
 	task = Task.new()
 	task.device = Device.new()
 	task.device.sprite_index = randi() % 10 # TODO: do this based on available device types
-	var requirements_count = rand_range(1, 4)
+	var requirements_count = rng.randi_range(0, 4)
 	for _i in range(requirements_count):
 		task.requirements.push_back(rand_range(0, 4))
-	base_money = randi() % 14 + 2
-	max_pickup_waiting_time_in_seconds = randi() % 120 + 20
-	max_shipment_time_in_seconds = randi() % 180 + 40
+	base_money = rng.randi_range(2, 14)
+	max_pickup_waiting_time_in_seconds = rng.randi_range(20, 120)
+	max_shipment_time_in_seconds = rng.randi_range(40, 180)
