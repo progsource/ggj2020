@@ -66,3 +66,11 @@ func get_next_free_slot() -> CustomerSlot :
 		if !customer_slots[i].customer_data:
 			return customer_slots[i]
 	return null
+
+func free_slot(customer_data: CustomerData):
+	for i in range(customer_slots.size()):
+		if customer_slots[i].customer_data == customer_data:
+			customer_slots[i] = CustomerSlot.new()
+			customer_slots[i].position = customer_slot_positions[i]
+			customer_slots[i].pickup_position = pickup_slot_positions[i]
+			return

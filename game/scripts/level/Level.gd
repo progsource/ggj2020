@@ -54,6 +54,8 @@ func _spawn_customer() -> void :
 	customer_slot.customer_data.init_random_values()
 
 	var customer = spawn_customer_packed.instance()
+	customer.connect("costumer_leaves", self, "_despawn_customer")
+	customer.customer_data = customer_slot.customer_data
 	customer.position = customer_slot.position
 	customer.get_node("Sprite").texture = customer_slot.customer_data.sprites[customer_slot.customer_data.sprite_index]
 	add_child(customer)
@@ -64,6 +66,10 @@ func _spawn_customer() -> void :
 	device.position = customer_slot.pickup_position
 	add_child(device)
 	device.display(customer_slot.customer_data.task.device.sprite_index)
+
+# warning-ignore:unused_argument
+func _despawn_customer(customer_data: CustomerData):
+	level_data.free_slot(customer_data)
 
 func _on_customer_spawn_timer_timeout():
 	if level_data.has_free_customer_slot():

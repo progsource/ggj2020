@@ -3,10 +3,6 @@ extends Node
 var tween = Tween.new()
 onready var taskCard = preload("res://packed/hud/TaskList/TaskCard.tscn")
 
-var timer_raw = 0
-var timer = 0
-var count = 1
-
 var isRunning : bool = false
 
 func _ready():
