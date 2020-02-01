@@ -14,6 +14,6 @@
 [node name="HudProgress" parent="." instance=ExtResource( 3 )]
 
 [node name="LevelTimer" parent="." instance=ExtResource( 2 )]
-[connection signal="start_button_pressed" from="StartButton" to="TaskList" method="_on_StartButton_start_button_pressed"]
 [connection signal="start_button_pressed" from="StartButton" to="LevelTimer" method="_on_StartButton_start_button_pressed"]
+[connection signal="start_button_pressed" from="StartButton" to="TaskList" method="_on_StartButton_start_button_pressed"]
 [connection signal="level_ended" from="LevelTimer" to="TaskList" method="_on_LevelTimer_level_ended"]

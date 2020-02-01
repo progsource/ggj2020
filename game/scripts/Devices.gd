@@ -42,4 +42,3 @@ func display(var item_type : int):
 func hide_item() -> void :
 	for i in range(0, items.size()):
 		items[i].visible = false
-	
