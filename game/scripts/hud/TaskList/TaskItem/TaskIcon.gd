@@ -2,7 +2,7 @@ extends Node
 
 export var type: String = "Mobile"
 
-var mobile = preload("res://packed/items/Mobile.tscn")
+onready var mobile = preload("res://packed/items/Mobile.tscn")
 
 func _ready():
 	var icon
