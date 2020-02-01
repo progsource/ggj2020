@@ -1,6 +1,0 @@
-[gd_scene format=2]
-
-[node name="MachineIcon" type="Node2D"]
-__meta__ = {
-"_editor_description_": ""
-}

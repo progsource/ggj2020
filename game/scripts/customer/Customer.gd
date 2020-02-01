@@ -1,15 +1,23 @@
 extends "res://scripts/character/Character.gd"
 
-
+var customer_data: CustomerData = null
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+signal costumer_leaves(customer_data)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+# warning-ignore:unused_argument
+func _process(delta):
+	if customer_data == null:
+		return
+	if customer_data.task.taskFailed or customer_data.task.taskCompleted:
+		emit_signal("costumer_leaves", customer_data)
+		queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
