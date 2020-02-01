@@ -13,6 +13,7 @@ func _ready():
 	tween.connect("tween_completed", self, "TweenComplete") 
 	add_child(tween)
 
+
 func _on_StartButton_start_button_pressed():
 	isRunning = true
 
@@ -20,26 +21,25 @@ func _on_LevelTimer_level_ended():
 	isRunning = false
 	clear_child_list()
 
-func _on_Task_recieved(task):
+func _on_Task_recieved(task: CustomerData):
 	if !isRunning:
 		return
 
 	var list = get_child_count()
 	var card = taskCard.instance()
 	card.name = str(task)
-	card.task = task
+	card.customer_data = task
 	
 	if list > 1:
 		var lastTask = get_child(list - 1)
 		var pos = Vector2(
-			lastTask.position.x + 50,
+			lastTask.position.x + 35,
 			lastTask.position.y
 		)
 		card.position = pos
 
 	card.connect("remove_card", self, "_on_TaskCard_remove_card")
-	card.get_child(2).time_for_item = rand_range(6, 6)
-	print("Time for Item " + str(card.get_child(2).time_for_item))
+	card.connect("task_completed", self, "_on_Task_completed")
 	add_child(card)
 
 func _on_TaskCard_remove_card(node):
@@ -47,8 +47,26 @@ func _on_TaskCard_remove_card(node):
 		node,
 		"modulate:a",
 		1.0, 0.0, 0.1,
-		Tween.TRANS_QUAD,
+		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT
+	)
+	tween.start()
+
+func _on_Task_completed(node):
+	tween.interpolate_property(
+		node,
+		"modulate:a",
+		1.0, 0.0, 0.01,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+	)
+	tween.interpolate_property(
+		node,
+		"position:y",
+		node.position.y,
+		node.position.y - 40,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
 	)
 	tween.start()
 
@@ -56,8 +74,10 @@ func _on_TaskCard_remove_card(node):
 func TweenComplete(object, key):
 	match str(key):
 		":modulate:a":
-			print('Removing Node ' + object.name)
+			var customer_data = object.customer_data
 			remove_child(object)
+			if !customer_data.task.taskCompleted:
+				customer_data.task.taskFailed = true
 			move_Tasks()
 
 func move_Tasks():
@@ -67,9 +87,9 @@ func move_Tasks():
 				node,
 				"position:x",
 				node.position.x,
-				node.position.x - 50,
+				node.position.x - 35,
 				1,
-				Tween.TRANS_CUBIC,
+				Tween.TRANS_LINEAR,
 				Tween.EASE_IN_OUT
 			)
 			tween.start()

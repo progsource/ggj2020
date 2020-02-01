@@ -3,6 +3,7 @@ extends Node2D
 signal item_exploded
 
 var items = {}
+var customer_data: CustomerData = null
 
 enum ItemType {
 	Calculator, OldCamera, Controller, Headphones, Monitor, MusicPlayer, Notebook, OldMonitor, Phone,
@@ -29,16 +30,23 @@ func _ready():
 
 	hide_items()
 
+
+# warning-ignore:unused_argument
 func _process(delta):
 	if $Explosion.frame == 7:
 		$Explosion.stop()
 		hide_items()
 		$Explosion.frame = 0
 
+	if customer_data == null:
+		return
+	if customer_data.task.taskFailed:
+		queue_free()
+
 func display(var item_type : int):
 	hide_items()
 	items[item_type].visible = true
-	
+
 	if item_type < DEVICE_AMOUNT:
 		var current_height = items[item_type].texture.get_height()
 		var wanted_heigth : float = 16
@@ -52,4 +60,3 @@ func hide_items() -> void :
 
 func explode() -> void :
 	$Explosion.play("default")
-	
