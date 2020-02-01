@@ -1,5 +1,8 @@
 extends Reference
 
+signal money_updated
+signal happiness_updated
+
 class_name LevelData
 
 var isRunning : bool = false
@@ -43,3 +46,13 @@ func start() -> void:
 	happiness = 100
 	_setup_customer_slots()
 	isRunning = true
+	emit_signal("money_updated")
+	emit_signal("happiness_updated")
+
+func add_money(var money : int):
+	self.money += money
+	emit_signal("money_updated")
+
+func update_happiness(var change : int):
+	self.happiness += change
+	emit_signal("happiness_updated")

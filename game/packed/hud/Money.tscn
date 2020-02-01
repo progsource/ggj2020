@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/img/generic_items/genericItems_spritesheet_colored.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/monogram.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/hud/Money.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
 [node name="Money" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 15, 0 )
