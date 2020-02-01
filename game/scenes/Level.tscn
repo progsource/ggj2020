@@ -9,6 +9,6 @@
 [node name="Room0" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 128, 128 )
+position = Vector2( 128, 162 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
