@@ -233,8 +233,8 @@ func init_random_values() -> void:
 	for _i in range(requirements_count):
 		task.requirements.push_back(rng.randi_range(9, 12))
 	base_money = rng.randi_range(2, 14)
-	var time = rng.randi_range(8, 12)
+	var time = rng.randi_range(60, 180)
 	task.waitingTime = time
 	task.reward = base_money
 	max_pickup_waiting_time_in_seconds = time
-	max_shipment_time_in_seconds = time
+	max_shipment_time_in_seconds = rng.randi_range(80, 240)
