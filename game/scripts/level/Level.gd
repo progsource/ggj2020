@@ -16,6 +16,11 @@ func _ready():
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
 
+func _process(delta):
+	if Input.is_action_pressed("take_action"):
+		$Player.hold_item(9)
+	else:
+		$Player.drop_item()
 
 func _on_start_button_pressed():
 	start()

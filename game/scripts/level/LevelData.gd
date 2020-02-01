@@ -10,7 +10,6 @@ var money : int = 0
 var happiness : int = 0
 var customer_slots := {}
 
-# TODO set positions to correct places on screen
 const customer_slot_positions = [
 	Vector2(320, 48),
 	Vector2(320, 80),
@@ -19,7 +18,6 @@ const customer_slot_positions = [
 	Vector2(176, 48),
 ]
 
-# TODO set positions to correct places on screen
 # note left bottom + size of 32x32
 const pickup_slot_positions = [
 	Vector2(352, 48),

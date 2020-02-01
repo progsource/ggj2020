@@ -225,7 +225,7 @@ func init_random_values() -> void:
 	rng.seed = OS.get_ticks_msec()
 	rng.randomize()
 
-	sprite_index = rng.randi_range(0, sprites.size())
+	sprite_index = rng.randi_range(0, sprites.size() - 1)
 	task = Task.new()
 	task.device = Device.new()
 	task.device.sprite_index = int(rand_range(0, 4)) # TODO: do this based on available device types

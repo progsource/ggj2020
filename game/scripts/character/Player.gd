@@ -20,11 +20,7 @@ func _physics_process(delta):
 		direction = direction.normalized()
 	
 	var movement = speed * direction * delta
-	
-	# warning-ignore:return_value_discarded
-	move_and_collide(movement)
-	
-	#if !attack_playing:
+	var collision_info = move_and_collide(movement)
 	animate_player(direction)
 
 
@@ -49,3 +45,12 @@ func animate_player(direction: Vector2):
 			$Sprite.frame = 7
 		else:
 			$Sprite.frame = 10
+
+
+func hold_item(var item_index : int):
+	$Items.display(item_index)
+	$ItemAnimation.play("item_hover")
+
+func drop_item():
+	$Items.hide_item()
+	$ItemAnimation.stop()

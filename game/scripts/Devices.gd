@@ -25,11 +25,11 @@ func _ready():
 	items[ItemType.MetalTable] = $MetalTable
 	items[ItemType.WashMachine] = $WashMachine
 
-	for i in range(0, items.size()):
-		items[i].visible = false
+	hide_item()
 
 
 func display(var item_type : int):
+	hide_item()
 	items[item_type].visible = true
 	
 	if item_type < DEVICE_AMOUNT:
@@ -39,3 +39,7 @@ func display(var item_type : int):
 		items[item_type].scale.x = scale
 		items[item_type].scale.y = scale
 
+func hide_item() -> void :
+	for i in range(0, items.size()):
+		items[i].visible = false
+	
