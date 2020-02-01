@@ -4,11 +4,13 @@ signal new_task_added(task)
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
+onready var devices_packed = preload("res://packed/items/Items.tscn")
 
 
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("new_task_added", get_node("HUD/TaskList"), "_on_Task_recieved")
+	get_node("HUD/LevelTimer").connect("level_ended", self, "stop")
 	# warning-ignore:return_value_discarded
 	$CustomerSpawnTimer.connect("timeout", self, "_on_customer_spawn_timer_timeout")
 	var start_button : StartButton = get_tree().root.get_node("Level/HUD/StartButton")
@@ -32,6 +34,8 @@ func start() -> void :
 func stop() -> void :
 	level_data.stop()
 	$CustomerSpawnTimer.stop()
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://scenes/splash.tscn")
 
 func _spawn_customer() -> void :
 	var customer_slot = level_data.get_next_free_slot()
@@ -44,6 +48,11 @@ func _spawn_customer() -> void :
 	customer.get_node("Sprite").texture = customer_slot.customer_data.sprites[customer_slot.customer_data.sprite_index]
 	add_child(customer)
 	emit_signal("new_task_added", customer_slot.customer_data.task)
+
+	var device = devices_packed.instance()
+	device.position = customer_slot.pickup_position
+	add_child(device)
+	device.display(customer_slot.customer_data.task.device.sprite_index)
 
 func _on_customer_spawn_timer_timeout():
 	if level_data.has_free_customer_slot():
