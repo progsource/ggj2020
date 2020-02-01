@@ -20,11 +20,11 @@ const customer_slot_positions = [
 
 # note left bottom + size of 32x32
 const pickup_slot_positions = [
-	Vector2(352, 48),
-	Vector2(320, 112),
-	Vector2(240, 112),
-	Vector2(176, 112),
-	Vector2(144, 48),
+	Vector2(336, 42),
+	Vector2(304, 106),
+	Vector2(240, 106),
+	Vector2(176, 106),
+	Vector2(144, 42),
 ]
 
 class CustomerSlot:

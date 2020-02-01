@@ -21,7 +21,7 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _process(delta):
-	if Input.is_action_just_released("take_action"):
+	if Input.is_action_just_released("ui_accept"):
 		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
 				$Player.hold_item(9)
