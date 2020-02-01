@@ -1,6 +1,7 @@
 extends Node2D
 
 signal new_task_added(task)
+signal item_picked_up(slot_index)
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
@@ -10,7 +11,7 @@ onready var devices_packed = preload("res://packed/items/Items.tscn")
 func _ready():
 	# warning-ignore:return_value_discarded
 	connect("new_task_added", get_node("HUD/TaskList"), "_on_Task_recieved")
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	get_node("HUD/LevelTimer").connect("level_ended", self, "stop")
 	# warning-ignore:return_value_discarded
 	$CustomerSpawnTimer.connect("timeout", self, "_on_customer_spawn_timer_timeout")
@@ -33,6 +34,19 @@ func _process(delta):
 				$Player.hold_item(10)
 			elif $Player.held_item == 10:
 				$Player.drop_item()
+
+		if $Room0/Counter/Area2D.overlaps_body($Player):
+			if $Player.held_item == -1 && level_data.customer_slots[0] && level_data.customer_slots[0].customer_data:
+				var item_index = level_data.customer_slots[0].customer_data.task.device.sprite_index
+				level_data.customer_slots[0].customer_data.task.taskStarted = true
+				$Player.hold_item(item_index)
+				emit_signal("item_picked_up", 0)
+		elif $Room0/Counter2/Area2D.overlaps_body($Player):
+			if $Player.held_item == -1 && level_data.customer_slots[1] && level_data.customer_slots[1].customer_data:
+				var item_index = level_data.customer_slots[1].customer_data.task.device.sprite_index
+				level_data.customer_slots[1].customer_data.task.taskStarted = true
+				$Player.hold_item(item_index)
+				emit_signal("item_picked_up", 1)
 
 
 func _on_start_button_pressed():
@@ -60,8 +74,10 @@ func _spawn_customer() -> void :
 	emit_signal("new_task_added", customer_slot.customer_data)
 
 	var device = devices_packed.instance()
+	device.slot = customer_slot.index
 	device.customer_data = customer_slot.customer_data
 	device.position = customer_slot.pickup_position
+	connect("item_picked_up", device, "_on_item_picked_up")
 	add_child(device)
 	device.display(customer_slot.customer_data.task.device.sprite_index)
 

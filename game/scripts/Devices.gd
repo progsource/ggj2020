@@ -4,6 +4,7 @@ signal item_exploded
 
 var items = {}
 var customer_data: CustomerData = null
+var slot : int = -1
 
 enum ItemType {
 	Calculator, OldCamera, Controller, Headphones, Monitor, MusicPlayer, Notebook, OldMonitor, Phone,
@@ -40,8 +41,8 @@ func _process(delta):
 
 	if customer_data == null:
 		return
-	if customer_data.task.taskFailed:
-		queue_free()
+	#if customer_data.task.taskFailed:
+		#queue_free()
 
 func display(var item_type : int):
 	hide_items()
@@ -60,3 +61,7 @@ func hide_items() -> void :
 
 func explode() -> void :
 	$Explosion.play("default")
+
+func _on_item_picked_up(slot_index):
+	if slot == slot_index:
+		hide_items()

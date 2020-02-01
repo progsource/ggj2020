@@ -28,6 +28,7 @@ const pickup_slot_positions = [
 ]
 
 class CustomerSlot:
+	var index : int = -1
 	var position := Vector2(0, 0)
 	var pickup_position := Vector2(0, 0)
 	var customer_data : CustomerData = null
@@ -36,6 +37,7 @@ func _setup_customer_slots() -> void:
 	customer_slots.clear()
 	for i in range(customer_slot_positions.size()):
 		customer_slots[i] = CustomerSlot.new()
+		customer_slots[i].index = i
 		customer_slots[i].position = customer_slot_positions[i]
 		customer_slots[i].pickup_position = pickup_slot_positions[i]
 

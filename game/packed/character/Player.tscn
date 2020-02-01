@@ -5,7 +5,7 @@
 [ext_resource path="res://packed/items/Items.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.2078, 15.5923 )
+extents = Vector2( 13.2078, 11.1263 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "player_down"
@@ -101,6 +101,7 @@ hframes = 3
 region_rect = Rect2( 32, 96, 32, 32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -110,6 +111,7 @@ anims/player_right = SubResource( 4 )
 anims/player_up = SubResource( 5 )
 
 [node name="Items" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 0, -20 )
 
 [node name="ItemAnimation" type="AnimationPlayer" parent="."]
