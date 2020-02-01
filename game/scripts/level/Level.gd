@@ -56,9 +56,10 @@ func _spawn_customer() -> void :
 	customer.position = customer_slot.position
 	customer.get_node("Sprite").texture = customer_slot.customer_data.sprites[customer_slot.customer_data.sprite_index]
 	add_child(customer)
-	emit_signal("new_task_added", customer_slot.customer_data.task)
+	emit_signal("new_task_added", customer_slot.customer_data)
 
 	var device = devices_packed.instance()
+	device.customer_data = customer_slot.customer_data
 	device.position = customer_slot.pickup_position
 	add_child(device)
 	device.display(customer_slot.customer_data.task.device.sprite_index)

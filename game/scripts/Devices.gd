@@ -1,6 +1,7 @@
 extends Node2D
 
 var items = {}
+var customer_data: CustomerData = null
 
 enum ItemType {
 	Calculator, OldCamera, Controller, Headphones, Monitor, MusicPlayer, Notebook, OldMonitor, Phone,
@@ -27,6 +28,12 @@ func _ready():
 
 	hide_item()
 
+# warning-ignore:unused_argument
+func _process(delta):
+	if customer_data == null:
+		return
+	if customer_data.task.taskFailed:
+		queue_free()
 
 func display(var item_type : int):
 	hide_item()
