@@ -9,11 +9,7 @@ func _ready():
 	connect("pressed", self, "_on_StartButton_pressed")
 
 func _input(event):
-	# button_index 0 = XBox - A
-	# button_index 1 = XBox - B
-	# button_index 2 = XBox - Y
-	# button_index 3 = XBox - X
-	if event is InputEventJoypadButton and event.button_index == 0:
+	if event.is_action_released("ui_accept"):
 		_on_StartButton_pressed()
 
 func _on_StartButton_pressed():
