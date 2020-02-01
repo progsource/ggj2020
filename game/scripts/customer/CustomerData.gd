@@ -3,14 +3,14 @@ extends Reference
 class_name CustomerData
 
 const sprites = [
-	"res://assets/img/pipoya/Male/Male 01-1.png",
-	"res://assets/img/pipoya/Male/Male 01-2.png",
-	"res://assets/img/pipoya/Male/Male 01-3.png",
-	"res://assets/img/pipoya/Male/Male 01-4.png",
-	"res://assets/img/pipoya/Male/Male 02-1.png",
-	"res://assets/img/pipoya/Male/Male 02-2.png",
-	"res://assets/img/pipoya/Male/Male 02-3.png",
-	"res://assets/img/pipoya/Male/Male 03-4.png",
+	preload("res://assets/img/pipoya/Male/Male 01-1.png"),
+	preload("res://assets/img/pipoya/Male/Male 01-2.png"),
+	preload("res://assets/img/pipoya/Male/Male 01-3.png"),
+	preload("res://assets/img/pipoya/Male/Male 01-4.png"),
+	preload("res://assets/img/pipoya/Male/Male 02-1.png"),
+	preload("res://assets/img/pipoya/Male/Male 02-2.png"),
+	preload("res://assets/img/pipoya/Male/Male 02-3.png"),
+	preload("res://assets/img/pipoya/Male/Male 03-4.png"),
 	# TODO: add more
 ]
 

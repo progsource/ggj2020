@@ -12,21 +12,21 @@ var customer_slots := {}
 
 # TODO set positions to correct places on screen
 const customer_slot_positions = [
-	Vector2(0, 0),
-	Vector2(0, 1),
-	Vector2(0, 2),
-	Vector2(0, 3),
-	Vector2(0, 4),
+	Vector2(320, 48),
+	Vector2(320, 80),
+	Vector2(240, 80),
+	Vector2(176, 80),
+	Vector2(176, 48),
 ]
 
 # TODO set positions to correct places on screen
 # note left bottom + size of 32x32
 const pickup_slot_positions = [
-	Vector2(0, 0),
-	Vector2(0, 1),
-	Vector2(0, 2),
-	Vector2(0, 3),
-	Vector2(0, 4),
+	Vector2(352, 48),
+	Vector2(320, 112),
+	Vector2(240, 112),
+	Vector2(176, 112),
+	Vector2(144, 48),
 ]
 
 class CustomerSlot:
@@ -49,6 +49,9 @@ func start() -> void:
 	emit_signal("money_updated", money)
 	emit_signal("happiness_updated", happiness)
 
+func stop() -> void :
+	isRunning = false
+
 func add_money(var change : int):
 	self.money += change
 	emit_signal("money_updated", self.money)
@@ -56,3 +59,12 @@ func add_money(var change : int):
 func update_happiness(var change : int):
 	self.happiness += change
 	emit_signal("happiness_updated", happiness)
+
+func has_free_customer_slot() -> bool :
+	return get_next_free_slot() != null
+
+func get_next_free_slot() -> CustomerSlot :
+	for i in range(customer_slots.size()):
+		if !customer_slots[i].customer_data:
+			return customer_slots[i]
+	return null
