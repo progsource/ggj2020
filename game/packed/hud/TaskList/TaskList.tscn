@@ -1,3 +1,13 @@
 [gd_scene format=2]
 
 [node name="TaskList" type="Node2D"]
+__meta__ = {
+"_editor_description_": "Displays Task List
+
+ Manages Task list state
+ number of tasks in queque
+	add task
+	remove task
+	complete task
+"
+}

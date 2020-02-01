@@ -1,3 +1,22 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://packed/hud/TaskList/TaskItem/TaskTimer.tscn" type="PackedScene" id=2]
 
 [node name="TaskCard" type="Node2D"]
+__meta__ = {
+"_editor_description_": "Manages a Task
+
+Displays
+Icon Bases on Task Type
+Material List based on Task Type
+Machine List based on Task Type
+Timer: time left before customer removes item from Queue as progressbar
+
+Trackes
+ remove timer
+ time to complete
+ "
+}
+
+[node name="TaskTimer" parent="." instance=ExtResource( 2 )]
+position = Vector2( 33.6075, 45.0717 )

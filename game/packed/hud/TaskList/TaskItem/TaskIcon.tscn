@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="TaskIcon" type="Node2D"]
+__meta__ = {
+"_editor_description_": "Display Icon based on Type"
+}
