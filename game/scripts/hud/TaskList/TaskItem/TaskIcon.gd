@@ -1,13 +1,16 @@
 extends Node
 
-export var type: String = "Mobile"
+var task: Task = null
 
 onready var mobile = preload("res://packed/items/Mobile.tscn")
 
-func _ready():
-	var icon
-	match type:
-		"Mobile":
-			icon = mobile.instance()
+func add_icon():
+	if task == null:
+		return
 
-	add_child(icon)
+	var icon
+	var isMobile = task.device.sprite_index % 2
+	match isMobile:
+		1:
+			icon = mobile.instance()
+			add_child(icon)
