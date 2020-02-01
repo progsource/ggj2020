@@ -11,12 +11,12 @@ corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
-[node name="TaskTimer" type="Node2D"]
+[node name="TaskTimer" type="Sprite"]
 script = ExtResource( 1 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_right = 112.0
-margin_bottom = 14.0
+margin_right = 50.0
+margin_bottom = 5.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 step = 1.0

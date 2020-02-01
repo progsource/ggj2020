@@ -14,7 +14,7 @@ func _input(event):
 	# button_index 2 = XBox - Y
 	# button_index 3 = XBox - X
 	if event is InputEventJoypadButton and event.button_index == 0:
-		_pressed()
+		_on_StartButton_pressed()
 
 func _on_StartButton_pressed():
 	emit_signal("start_button_pressed")

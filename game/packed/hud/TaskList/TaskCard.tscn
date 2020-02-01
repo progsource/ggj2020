@@ -25,6 +25,5 @@ Trackes
 
 [node name="TaskTimer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 50 )
-scale = Vector2( 0.2, 0.4 )
 time_for_item = 5
 [connection signal="task_expired" from="TaskTimer" to="." method="_on_TaskTimer_task_expired"]
