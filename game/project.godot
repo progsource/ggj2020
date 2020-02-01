@@ -9,13 +9,31 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "Device",
+"language": "GDScript",
+"path": "res://scripts/tasks/Device.gd"
+}, {
+"base": "Reference",
+"class": "Requirement",
+"language": "GDScript",
+"path": "res://scripts/tasks/Requirement.gd"
+}, {
 "base": "Button",
 "class": "StartButton",
 "language": "GDScript",
 "path": "res://scripts/hud/StartButton.gd"
+}, {
+"base": "Reference",
+"class": "Task",
+"language": "GDScript",
+"path": "res://scripts/tasks/Task.gd"
 } ]
 _global_script_class_icons={
-"StartButton": ""
+"Device": "",
+"Requirement": "",
+"StartButton": "",
+"Task": ""
 }
 
 [application]
