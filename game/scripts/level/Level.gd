@@ -14,6 +14,7 @@ var level_data := LevelData.new()
 onready var devices_packed = preload("res://packed/items/Items.tscn")
 var player_is_welding : bool = false
 var player_is_assembling : bool = false
+var counter_stations = []
 var assemble_stations = []
 
 func _ready():
@@ -27,6 +28,15 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
+
+	counter_stations.push_back($Room0/Counter)
+	counter_stations.push_back($Room0/Counter3)
+	counter_stations.push_back($Room0/Counter5)
+	counter_stations.push_back($Room0/Counter7)
+	counter_stations.push_back($Room0/Counter9)
+	
+	for i in range(counter_stations.size()):
+		counter_stations[i].connect("device_returned", self, "_on_device_returned")
 
 	assemble_stations.push_back($Room0/AssembleStation)
 	assemble_stations.push_back($Room0/AssembleStation2)
@@ -190,4 +200,17 @@ func _on_assembling_finished(var station_index : int):
 	var slot_index = assemble_stations[station_index].get_slot_index()
 
 	var customer_slot = level_data.customer_slots[slot_index]
-	customer_slot.customer_data.task.requirements[0].requirement_satisfied = true
+	var req = customer_slot.customer_data.task.get_current_requirement()
+	req.requirement_satisfied = true
+
+func _on_device_returned(var slot_index : int, var device_index : int, var original_slot_index : int):
+	var customer_slot = level_data.customer_slots[slot_index]
+	if original_slot_index != slot_index:
+		customer_slot.customer_data.task.taskFailed = true
+		counter_stations[slot_index].explode_item()
+	elif customer_slot.customer_data.task.get_current_requirement() != null:
+		customer_slot.customer_data.task.taskFailed = true
+		counter_stations[slot_index].explode_item()
+	else:
+		customer_slot.customer_data.task.taskCompleted = true
+	

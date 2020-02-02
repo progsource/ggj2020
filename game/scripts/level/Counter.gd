@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-signal device_returned(slot_index, device_index)
+signal device_returned(slot_index, device_index, original_slot_index)
 
 export var has_vertical_sprite : bool = false
 export var has_mirrored_sprite : bool = false
@@ -13,9 +13,10 @@ func _ready():
 	$Sprite.flip_h = has_mirrored_sprite
 
 
-func hold_item(var index : int):
+func hold_item(var index : int, var original_slot_index : int):
 	$Items.display(index)
-	emit_signal("device_returned", slot_index, index)
+	$Items.slot = original_slot_index
+	emit_signal("device_returned", slot_index, index, original_slot_index)
 
 func remove_item():
 	$Items.hide_items()
