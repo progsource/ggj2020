@@ -54,10 +54,12 @@ func _process(delta):
 		return
 	if customer_data.task.taskFailed or customer_data.task.taskCompleted:
 		GlobalData.currently_in_use_devices.erase(customer_data.task.device.sprite_index)
+		print("destroy item")
 		queue_free()
 
 func display(var item_type : int):
 	hide_items()
+	print("make %d visible" % item_type)
 	items[item_type].visible = true
 
 	if item_type < DEVICE_AMOUNT:

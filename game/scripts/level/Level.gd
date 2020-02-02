@@ -35,6 +35,7 @@ func _ready():
 	counter_stations.push_back($Room0/Counter9)
 
 	for i in range(counter_stations.size()):
+		connect("item_picked_up", counter_stations[i], "_on_item_picked_up")
 		counter_stations[i].connect("device_returned", self, "_on_device_returned")
 
 	assemble_stations.push_back($Room0/AssembleStation)
@@ -124,7 +125,7 @@ func try_pickup_item(var counter : KinematicBody2D) :
 		counter.remove_item()
 		$Player.hold_item(item_index, index)
 		emit_signal("item_picked_up", index)
-	elif $Player.held_item > -1 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
+	elif $Player.held_item > -1 && counter.get_sprite_index() < 0 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
 		counter.hold_item($Player.held_item, $Player.get_slot_index())
 		$Player.drop_item()
 
@@ -194,17 +195,19 @@ func _spawn_customer() -> void :
 	add_child(customer)
 	emit_signal("new_task_added", customer_slot.customer_data)
 
-	var device = devices_packed.instance()
-	device.slot = customer_slot.index
-	device.customer_data = customer_slot.customer_data
-	device.position = customer_slot.pickup_position
-	connect("item_picked_up", device, "_on_item_picked_up")
-	add_child(device)
-	device.display(customer_slot.customer_data.task.device.sprite_index)
+	#var device = devices_packed.instance()
+	#device.slot = customer_slot.index
+	#device.customer_data = customer_slot.customer_data
+	#device.position = customer_slot.pickup_position
+	#connect("item_picked_up", device, "_on_item_picked_up")
+	counter_stations[customer_slot.index].hold_item(customer_slot.customer_data.task.device.sprite_index, customer_slot.index, false)
+	#add_child(device)
+#	device.display(customer_slot.customer_data.task.device.sprite_index)
 
 # warning-ignore:unused_argument
 func _despawn_customer(customer_data: CustomerData):
 	level_data.free_slot(customer_data)
+	$CustomerSpawnTimer.start()
 
 func _on_customer_spawn_timer_timeout():
 	if level_data.has_free_customer_slot():
@@ -232,7 +235,7 @@ func _on_device_returned(var slot_index : int, var device_index : int, var origi
 		counter_stations[slot_index].explode_item()
 		var other_customer = level_data.customer_slots[original_slot_index]
 		other_customer.customer_data.task.taskFailed = true
-		#counter_stations[original_slot_index].explode_item() # actually this should kill the device no matter where it is at the moment
+		other_customer.explode()
 	elif customer_slot.customer_data.task.get_current_requirement() != null:
 		customer_slot.customer_data.task.taskFailed = true
 		counter_stations[slot_index].explode_item()

@@ -243,7 +243,10 @@ func init_random_values() -> void:
 
 func _get_random_device() -> int :
 	var device_index = -1
-	while device_index == -1 :
+	var max_tries = 9
+	var tries = 0
+	while device_index == -1 && tries < max_tries :
+		tries += 1
 		device_index = rng.randi_range(0, 8)
 		if device_index in GlobalData.currently_in_use_devices:
 			device_index = -1

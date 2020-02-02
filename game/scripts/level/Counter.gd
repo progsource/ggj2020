@@ -12,15 +12,25 @@ func _ready():
 		$Sprite.texture = vertical_sprite
 	$Sprite.flip_h = has_mirrored_sprite
 
+func _process(delta):
+	pass
 
-
-func hold_item(var index : int, var original_slot_index : int):
+func hold_item(var index : int, var original_slot_index : int, var is_returned = true):
 	$Items.display(index)
 	$Items.set_slot(original_slot_index)
-	emit_signal("device_returned", slot_index, index, original_slot_index)
+	if is_returned:
+		emit_signal("device_returned", slot_index, index, original_slot_index)
 
 func remove_item():
 	$Items.hide_items()
 
 func explode_item():
 	$Items.explode()
+
+func _on_item_picked_up(slot_index):
+	$Items._on_item_picked_up(slot_index)
+
+func get_sprite_index():
+	if $Items.customer_data:
+		return $Items.customer_data.task.device.sprite_index
+	return -1
