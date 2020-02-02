@@ -227,14 +227,20 @@ func init_random_values() -> void:
 	rng.randomize()
 
 	sprite_index = rng.randi_range(0, sprites.size() - 1)
+	print("task sprite_index: %d" % sprite_index)
 	task = Task.new()
 	task.device = Device.new()
 	task.device.sprite_index = _get_random_device()
+	print("task device sprite_index %d" % task.device.sprite_index)
 	var requirements_count = rng.randi_range(1, 4)
 	for _i in range(requirements_count):
 		var requirement = Requirement.new()
 		requirement.requirement_index = rng.randi_range(9, 12)
+		print("requirement index: %d" % requirement.requirement_index)
 		task.requirements.push_back(requirement)
+		
+	for req in task.requirements:
+		print("double check req index %d" % req.requirement_index)
 	base_money = rng.randi_range(2, 14)
 	var time = rng.randi_range(60, 180)
 	task.waitingTime = time

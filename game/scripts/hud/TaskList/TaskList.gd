@@ -18,7 +18,6 @@ func _on_LevelTimer_level_ended():
 	clear_child_list()
 
 func _on_Task_recieved(customer_data: CustomerData):
-	print(isRunning)
 	if !isRunning:
 		return
 

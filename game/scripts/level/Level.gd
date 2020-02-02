@@ -154,20 +154,27 @@ func try_assemble_station(var station : KinematicBody2D):
 			station.remove_item()
 	elif $Player.held_item < 9: # player is holding device
 		if station.held_item == -1:
-			station.hold_item($Player.held_item, station.index)
+			station.hold_item($Player.held_item, $Player.get_slot_index())
 			$Player.drop_item()
 
 func try_start_to_assemble(var station : KinematicBody2D) -> void :
+	print("#####try_start_to_assemble")
+	print("station.held_item %d" % station.held_item)
+	print("player held item %d" % $Player.held_item)
 	if station.held_item != -1 && ($Player.held_item == 9 || $Player.held_item == 10):
 		var slot_index = station.get_slot_index()
+		print("station_slot_index %d" % slot_index)
 		var customer_slot = level_data.customer_slots[slot_index]
+		print("customer_slot_index %d" % customer_slot.index)
 		var requirement = customer_slot.customer_data.task.get_current_requirement()
 		if !requirement || requirement.requirement_index != $Player.held_item:
 			$Player.drop_item()
-			station.explode_item()
-			customer_slot.customer_data.task.taskFailed = true
+			customer_slot.explode()
+			#station.explode_item()
+			#customer_slot.customer_data.task.taskFailed = true
 		else:
 			emit_signal("player_started_assembling", station.index)
+	print("#####try_start_to_assemble###############")
 
 func _on_start_button_pressed():
 	GlobalData.currently_in_use_devices.clear()

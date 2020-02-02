@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
 signal assembling_finished
-var held_item : int = -1
+var held_item : int = -1 setget set_held_item
 const welding_time = 4.0
 var left_welding_time = 0.0
 var index = -1
 
+func set_held_item(var device_index : int) -> void :
+	print("AssembleStation(%d).set_held_item %d" % [index, device_index])
+	held_item = device_index
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -13,10 +16,11 @@ func _ready():
 	$Items.connect("item_exploded", self, "_on_item_exploded")
 	_update_progress_bar()
 
-func hold_item(var index : int, var slot_index : int):
-	$Items.display(index)
+func hold_item(var device_index : int, var slot_index : int):
+	print("AssembleStation(%d).hold_item: device_index %s, slot_index %s" % [index, device_index, slot_index])
+	$Items.display(device_index)
 	$Items.set_slot(slot_index)
-	held_item = index
+	held_item = device_index
 
 func explode_item():
 	$Items.explode()
@@ -30,7 +34,7 @@ func remove_item():
 	$Items.set_slot(-1)
 
 func _on_player_started_assembling(var station_index):
-	if station_index != index:
+	if station_index != self.index:
 		return
 	left_welding_time = welding_time
 	$Timer.start()
