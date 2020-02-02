@@ -130,6 +130,7 @@ func try_start_to_assemble(var station : KinematicBody2D) -> bool :
 	return false
 
 func _on_start_button_pressed():
+	GlobalData.currently_in_use_devices.clear()
 	start()
 
 func start() -> void :
