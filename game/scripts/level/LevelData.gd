@@ -57,6 +57,7 @@ func add_money(var change : int):
 	emit_signal("money_updated", self.money)
 
 func update_happiness(var change : int):
+	change = max(0, min(change, 100))
 	self.happiness += change
 	emit_signal("happiness_updated", happiness)
 
