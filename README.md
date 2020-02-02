@@ -3,6 +3,8 @@ A Global Game Jam project
 
 ![](screenshot.png)
 
+play the game -> https://progsource.github.io/ggj2020/
+
 
 ## Ideas
 
