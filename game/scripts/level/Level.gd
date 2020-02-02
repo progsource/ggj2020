@@ -12,9 +12,13 @@ var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
 onready var devices_packed = preload("res://packed/items/Items.tscn")
 var player_is_welding : bool = false
-var player_is_assembling : bool = false
+var player_is_assembling : bool = false setget set_player_is_assembling
 var counter_stations = []
 var assemble_stations = []
+
+func set_player_is_assembling(var is_assembling : bool) -> void :
+	print("Level.set_player_is_assembling: %s" % is_assembling)
+	player_is_assembling = is_assembling
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -171,6 +175,9 @@ func try_start_to_assemble(var station : KinematicBody2D) -> void :
 		var customer_slot = level_data.customer_slots[slot_index]
 		print("customer_slot_index %d" % customer_slot.index)
 		var requirement = customer_slot.customer_data.task.get_current_requirement()
+		print("requirement: %s" % requirement != null)
+		if requirement:
+			print("requirement_index %d" % requirement.requirement_index)
 		if !requirement || requirement.requirement_index != $Player.held_item:
 			$Player.drop_item()
 			customer_slot.explode()

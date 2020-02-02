@@ -34,6 +34,7 @@ func remove_item():
 	$Items.set_slot(-1)
 
 func _on_player_started_assembling(var station_index):
+	print("AssembleStation(%d)._on_player_started_assembling: station_index %d" % [index, station_index])
 	if station_index != self.index:
 		return
 	left_welding_time = welding_time
