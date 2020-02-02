@@ -38,7 +38,7 @@ func _ready():
 		connect("player_stopped_assembling", assemble_stations[i], "_on_player_stopped_assembling")
 		assemble_stations[i].connect("assembling_finished", self, "_on_assembling_finished")
 
-	$Room0/WashMachine.index = 0
+	$Room0/WashMachine.index = 1
 	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
 	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
 
