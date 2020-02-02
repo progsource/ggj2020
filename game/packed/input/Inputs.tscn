@@ -13,62 +13,34 @@ script = ExtResource( 7 )
 
 [node name="Confirm" type="Node2D" parent="."]
 
-[node name="Key" type="TextureRect" parent="Confirm"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="Key" type="Sprite" parent="Confirm"]
+position = Vector2( 6, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="XBox" type="TextureRect" parent="Confirm"]
-margin_left = 16.0
-margin_right = 116.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="XBox" type="Sprite" parent="Confirm"]
+position = Vector2( 20, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PS4" type="TextureRect" parent="Confirm"]
-margin_left = 34.0
-margin_right = 50.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="PS4" type="Sprite" parent="Confirm"]
+position = Vector2( 34, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Action" type="Node2D" parent="."]
 
-[node name="Key" type="TextureRect" parent="Action"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="Key" type="Sprite" parent="Action"]
+position = Vector2( 6, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="XBox" type="TextureRect" parent="Action"]
-margin_left = 16.0
-margin_right = 116.0
-margin_bottom = 100.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="XBox" type="Sprite" parent="Action"]
+position = Vector2( 20, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="PS4" type="TextureRect" parent="Action"]
-margin_left = 34.0
-margin_right = 50.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.15, 0.15 )
+[node name="PS4" type="Sprite" parent="Action"]
+position = Vector2( 34, 6 )
+scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
