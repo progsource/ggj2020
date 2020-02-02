@@ -119,3 +119,4 @@ position = Vector2( 0, -20 )
 anims/item_hover = SubResource( 6 )
 
 [node name="Inputs" parent="." instance=ExtResource( 4 )]
+position = Vector2( 16, -16 )
