@@ -18,6 +18,7 @@ func _ready():
 # warning-ignore:unused_argument
 func _process(delta):
 	if customer_data.task.taskStarted:
+		customer_data.task.startedAt = $TaskTimer.left_time
 		$TaskTimer.get_node("Timer").paused = true
 	if customer_data.task.taskCompleted:
 		_on_task_complete()
