@@ -41,7 +41,7 @@ func _process(delta):
 
 	if customer_data == null:
 		return
-	if customer_data.task.taskFailed:
+	if customer_data.task.taskFailed or customer_data.task.taskCompleted:
 		GlobalData.currently_in_use_devices.erase(customer_data.task.device.sprite_index)
 		queue_free()
 
