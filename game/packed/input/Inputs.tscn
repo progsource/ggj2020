@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/img/input/confirm/Keyboard_Black_Enter_Alt.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/input/action/XboxOne_B.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/input/action/Keyboard_Black_R.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/input/confirm/XboxOne_A.png" type="Texture" id=4]
+[ext_resource path="res://assets/img/input/confirm/PS4_Cross.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/input/action/PS4_Circle.png" type="Texture" id=6]
+[ext_resource path="res://scripts/input/Inputs.gd" type="Script" id=7]
+
+[node name="Inputs" type="Node"]
+script = ExtResource( 7 )
+
+[node name="Confirm" type="Node" parent="."]
+
+[node name="Key" type="TextureRect" parent="Confirm"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XBox" type="TextureRect" parent="Confirm"]
+margin_left = 16.0
+margin_right = 116.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PS4" type="TextureRect" parent="Confirm"]
+margin_left = 34.0
+margin_right = 50.0
+margin_bottom = 16.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Action" type="Node" parent="."]
+
+[node name="Key" type="TextureRect" parent="Action"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="XBox" type="TextureRect" parent="Action"]
+margin_left = 16.0
+margin_right = 116.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PS4" type="TextureRect" parent="Action"]
+margin_left = 34.0
+margin_right = 50.0
+margin_bottom = 16.0
+rect_scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
