@@ -124,8 +124,8 @@ func try_assemble_station(var station : KinematicBody2D):
 	#		emit_signal("player_started_assembling", station.index)
 
 func try_start_to_assemble(var station : KinematicBody2D) -> bool :
-	if $Player.held_item != -1 && (station.held_item == 9 || station.held_item == 10):
-		emit_signal("player_started_assembling", station.inde)
+	if station.held_item != -1 && ($Player.held_item == 9 || $Player.held_item == 10):
+		emit_signal("player_started_assembling", station.index)
 		return true
 	return false
 
