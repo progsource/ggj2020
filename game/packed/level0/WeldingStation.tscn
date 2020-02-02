@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/img/progsource/metal_table.png" type="Texture" id=1]
 [ext_resource path="res://packed/level0/StationProgressBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://packed/items/Items.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/stations/WeldingStation.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.9579, 12.2992 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30.0665, 30.0391 )
+
 [node name="WeldingStation" type="KinematicBody2D"]
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -20,3 +26,10 @@ shape = SubResource( 1 )
 
 [node name="StationProgressBar" parent="." instance=ExtResource( 2 )]
 position = Vector2( -16, -18 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+
+[node name="Items" parent="." instance=ExtResource( 3 )]

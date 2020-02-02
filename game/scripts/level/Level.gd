@@ -6,7 +6,7 @@ signal item_picked_up(slot_index)
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
 onready var devices_packed = preload("res://packed/items/Items.tscn")
-
+var player_is_welding : bool = false
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -51,6 +51,24 @@ func _process(delta):
 			try_assemble_station($Room0/AssembleStation2)
 		elif $Room0/AssembleStation3/Area2D.overlaps_body($Player):
 			try_assemble_station($Room0/AssembleStation3)
+		elif $Room0/WeldingStation/Area2D.overlaps_body($Player):
+			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
+				$Room0/WeldingStation.hold_item($Player.held_item)
+				$Player.drop_item()
+			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
+				$Player.hold_item($Room0/WeldingStation.held_item)
+				$Room0/WeldingStation.remove_item()
+	elif Input.is_action_just_pressed("take_action"):
+		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
+			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
+				$Room0/WeldingStation.hold_item($Player.held_item)
+				$Player.drop_item()
+			
+			player_is_welding = true
+			pass # here the progress has to start and tick as long as it is pressed
+	elif Input.is_action_just_released("take_action") && player_is_welding:
+		player_is_welding = false
+		pass # stop timer - hint on explosion this has to be set also to false
 
 
 func try_pickup_item(var index : int) :
