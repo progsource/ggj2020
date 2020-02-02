@@ -21,7 +21,6 @@ func start():
 		item.scale.x = 0.5
 		item.scale.y = 0.5
 		item.position = pos[i]
-		item.modulate = Color(1, 1, 1, 0.5)
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -30,4 +29,4 @@ func _process(delta):
 	for i in range(requirements.size()):
 		if requirements[i].requirement_satisfied:
 			# warning-ignore:return_value_discarded
-			get_child(i).modulate = Color(0, 1, 1, 1)
+			get_child(i).modulate = Color(0, 1, 1)
