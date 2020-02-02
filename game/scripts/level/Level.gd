@@ -150,7 +150,7 @@ func try_washing_machine(var station : KinematicBody2D):
 func try_assemble_station(var station : KinematicBody2D):
 	if $Player.held_item == -1:
 		if station.held_item != -1:
-			$Player.hold_item(station.held_item, station.index)
+			$Player.hold_item(station.held_item, station.get_slot_index())
 			station.remove_item()
 	elif $Player.held_item < 9: # player is holding device
 		if station.held_item == -1:
@@ -170,8 +170,6 @@ func try_start_to_assemble(var station : KinematicBody2D) -> void :
 		if !requirement || requirement.requirement_index != $Player.held_item:
 			$Player.drop_item()
 			customer_slot.explode()
-			#station.explode_item()
-			#customer_slot.customer_data.task.taskFailed = true
 		else:
 			emit_signal("player_started_assembling", station.index)
 	print("#####try_start_to_assemble###############")
@@ -222,6 +220,7 @@ func _on_assembling_finished(var station_index : int):
 	print(station_index)
 	$Player.drop_item()
 	var slot_index = assemble_stations[station_index].get_slot_index()
+	print("Level._on_assembling_finished slot_index: %d" % slot_index)
 
 	var customer_slot = level_data.customer_slots[slot_index]
 	var req = customer_slot.customer_data.task.get_current_requirement()

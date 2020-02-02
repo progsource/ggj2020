@@ -46,6 +46,7 @@ func _on_timeout():
 	left_welding_time -= 1
 	if left_welding_time <= 0:
 		$Timer.stop()
+		print("AssembleStation(%d)._on_timeout index" % index)
 		emit_signal("assembling_finished", index)
 	_update_progress_bar()
 
