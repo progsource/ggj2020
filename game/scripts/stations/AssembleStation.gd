@@ -11,14 +11,16 @@ func _ready():
 	$Timer.connect("timeout", self, "_on_timeout")
 	_update_progress_bar()
 
-func hold_item(var index : int):
+func hold_item(var index : int, var slot_index : int):
 	print("%d should be shown" % index)
 	$Items.display(index)
+	$Items.slot = slot_index
 	held_item = index
 
 func remove_item():
 	held_item = -1
 	$Items.hide_items()
+	$Items.slot = -1
 
 func _on_player_started_assembling(var station_index):
 	if station_index != index:
@@ -33,10 +35,13 @@ func _on_player_stopped_assembling(var station_index):
 func _on_timeout():
 	left_welding_time -= 1
 	if left_welding_time <= 0:
-		emit_signal("assembling_finished")
+		emit_signal("assembling_finished", index)
 	_update_progress_bar()
 
 func _update_progress_bar():
 	var percentage = left_welding_time / welding_time
 	$StationProgressBar.update_progress(percentage)
 	$StationProgressBar.visible = percentage > 0
+
+func get_slot_index() -> int :
+	return $Items.slot

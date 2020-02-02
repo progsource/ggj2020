@@ -27,25 +27,28 @@ func _ready():
 	$Room0/AssembleStation.index = 0
 	connect("player_started_assembling", $Room0/AssembleStation, "_on_player_started_assembling")
 	connect("player_stopped_assembling", $Room0/AssembleStation, "_on_player_stopped_assembling")
+	$Room0/AssembleStation.connect("assembling_finished", self, "_on_assembling_finished")
 	$Room0/AssembleStation2.index = 1
 	connect("player_started_assembling", $Room0/AssembleStation2, "_on_player_started_assembling")
 	connect("player_stopped_assembling", $Room0/AssembleStation2, "_on_player_stopped_assembling")
+	$Room0/AssembleStation2.connect("assembling_finished", self, "_on_assembling_finished")
 	$Room0/AssembleStation3.index = 2
 	connect("player_started_assembling", $Room0/AssembleStation3, "_on_player_started_assembling")
 	connect("player_stopped_assembling", $Room0/AssembleStation3, "_on_player_stopped_assembling")
+	$Room0/AssembleStation3.connect("assembling_finished", self, "_on_assembling_finished")
 
 # warning-ignore:unused_argument
 func _process(delta):
 	if Input.is_action_just_released("ui_accept"):
 		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
-				$Player.hold_item(9)
+				$Player.hold_item(9, -1)
 			elif $Player.held_item == 9:
 				$Player.drop_item()
 				#$Player.explode_item()
 		elif $Room0/DisplayCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
-				$Player.hold_item(10)
+				$Player.hold_item(10, -1)
 			elif $Player.held_item == 10:
 				$Player.drop_item()
 
@@ -70,12 +73,12 @@ func _process(delta):
 				$Room0/WeldingStation.hold_item($Player.held_item)
 				$Player.drop_item()
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
-				$Player.hold_item($Room0/WeldingStation.held_item)
+				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
 	elif Input.is_action_just_pressed("take_action"):
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
-				$Room0/WeldingStation.hold_item($Player.held_item)
+				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
 			
 			emit_signal("player_started_welding")
@@ -102,7 +105,7 @@ func try_pickup_item(var counter : KinematicBody2D) :
 	if $Player.held_item == -1 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
 		var item_index = level_data.customer_slots[index].customer_data.task.device.sprite_index
 		level_data.customer_slots[index].customer_data.task.taskStarted = true
-		$Player.hold_item(item_index)
+		$Player.hold_item(item_index, index)
 		emit_signal("item_picked_up", index)
 	elif $Player.held_item > -1 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
 		counter.hold_item($Player.held_item)
@@ -112,11 +115,11 @@ func try_pickup_item(var counter : KinematicBody2D) :
 func try_assemble_station(var station : KinematicBody2D):
 	if $Player.held_item == -1:
 		if station.held_item != -1:
-			$Player.hold_item(station.held_item)
+			$Player.hold_item(station.held_item, station.index)
 			station.remove_item()
 	elif $Player.held_item < 9: # player is holding device
 		if station.held_item == -1:
-			station.hold_item($Player.held_item)
+			station.hold_item($Player.held_item, station.index)
 			$Player.drop_item()
 	#else: # the held item must be a screw or a display
 	#	if station.held_item != -1:
@@ -171,3 +174,8 @@ func _despawn_customer(customer_data: CustomerData):
 func _on_customer_spawn_timer_timeout():
 	if level_data.has_free_customer_slot():
 		_spawn_customer()
+
+func _on_assembling_finished(var station_index : int):
+	print("level says assemble done")
+	pass
+	
