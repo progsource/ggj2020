@@ -7,7 +7,6 @@ signal player_stopped_welding
 signal player_started_assembling(assemble_station_index)
 signal player_stopped_assembling
 signal player_started_washing(station_id)
-signal player_stopped_washing
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
@@ -48,10 +47,9 @@ func _ready():
 		connect("player_stopped_assembling", assemble_stations[i], "_on_player_stopped_assembling")
 		assemble_stations[i].connect("assembling_finished", self, "_on_assembling_finished")
 
-	$Room0/WashMachine.index = 4
+	$Room0/WashMachine.index = 5
 	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
-	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
-
+	$Room0/WashMachine.connect("washing_finished", self, "_on_washing_finished")
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -127,14 +125,22 @@ func try_pickup_item(var counter : KinematicBody2D) :
 		counter.hold_item($Player.held_item, $Player.get_slot_index())
 		$Player.drop_item()
 
-func try_washing_machine(var machine : KinematicBody2D):
-	if $Player.held_item == -1 && machine.held_item != -1 && !machine.washing:
-		$Player.hold_item(machine.held_item, machine.index)
-		machine.remove_item()
-	elif machine.held_item == -1 && $Player.held_item != -1:
-		machine.hold_item($Player.held_item, machine.index)
-		$Player.drop_item()
-		emit_signal("player_started_washing", machine.index)
+func try_washing_machine(var station : KinematicBody2D):
+	if $Player.held_item == -1 && station.held_item != -1 && !station.washing:
+		$Player.hold_item(station.held_item, station.get_slot_index())
+		station.remove_item()
+	elif station.held_item == -1 && $Player.held_item != -1:
+		var slot_index = $Player.get_slot_index()
+		var customer_slot = level_data.customer_slots[slot_index]
+		var requirement = customer_slot.customer_data.task.get_current_requirement()
+		if !requirement || requirement.requirement_index != Requirement.RequirementType.CLEANING:
+			$Player.drop_item()
+			station.explode_item()
+			customer_slot.customer_data.task.taskFailed = true
+		else:
+			station.hold_item($Player.held_item, $Player.get_slot_index())
+			$Player.drop_item()
+			emit_signal("player_started_washing", station.index)
 
 func try_assemble_station(var station : KinematicBody2D):
 	if $Player.held_item == -1:
@@ -206,6 +212,12 @@ func _on_assembling_finished(var station_index : int):
 	$Player.drop_item()
 	var slot_index = assemble_stations[station_index].get_slot_index()
 
+	var customer_slot = level_data.customer_slots[slot_index]
+	var req = customer_slot.customer_data.task.get_current_requirement()
+	req.requirement_satisfied = true
+
+func _on_washing_finished(var station_index: int):
+	var slot_index = $Room0/WashMachine.get_slot_index()
 	var customer_slot = level_data.customer_slots[slot_index]
 	var req = customer_slot.customer_data.task.get_current_requirement()
 	req.requirement_satisfied = true
