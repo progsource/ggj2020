@@ -5,6 +5,8 @@ A Global Game Jam project
 
 [![](screenshot.png)](https://progsource.github.io/ggj2020/)
 
+play the game -> https://progsource.github.io/ggj2020/
+
 
 ## Ideas
 
