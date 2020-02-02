@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/img/input/action/PS4_Circle.png" type="Texture" id=6]
 [ext_resource path="res://scripts/input/Inputs.gd" type="Script" id=7]
 
-[node name="Inputs" type="Node"]
+[node name="Inputs" type="Node2D"]
 script = ExtResource( 7 )
 
 [node name="Confirm" type="Node2D" parent="."]

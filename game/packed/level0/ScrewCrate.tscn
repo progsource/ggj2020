@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/img/progsource/table.png" type="Texture" id=1]
 [ext_resource path="res://assets/img/progsource/screw.png" type="Texture" id=2]
 [ext_resource path="res://scripts/stations/ScrewCrate.gd" type="Script" id=3]
-[ext_resource path="res://packed/input/Inputs.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.0799, 12.0908 )
@@ -30,5 +29,3 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
-
-[node name="Inputs" parent="." instance=ExtResource( 4 )]
