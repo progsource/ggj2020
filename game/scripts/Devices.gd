@@ -42,6 +42,7 @@ func _process(delta):
 	if customer_data == null:
 		return
 	if customer_data.task.taskFailed:
+		GlobalData.currently_in_use_devices.erase(customer_data.task.device.sprite_index)
 		queue_free()
 
 func display(var item_type : int):

@@ -54,6 +54,10 @@ config/name="Fix it or bust"
 run/main_scene="res://scenes/splash.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalData="*res://packed/GlobalData.tscn"
+
 [display]
 
 window/size/width=480

@@ -11,8 +11,8 @@ var happiness : int = 0
 var customer_slots := {}
 
 const customer_slot_positions = [
-	Vector2(320, 48),
-	Vector2(320, 80),
+	Vector2(304, 48),
+	Vector2(304, 80),
 	Vector2(240, 80),
 	Vector2(176, 80),
 	Vector2(176, 48),
