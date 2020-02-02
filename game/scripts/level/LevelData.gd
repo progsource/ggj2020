@@ -8,6 +8,7 @@ class_name LevelData
 var isRunning : bool = false
 var money : int = 0
 var happiness : int = 0
+var customerHappiness: int = 0
 var customer_slots := {}
 
 const customer_slot_positions = [
@@ -49,6 +50,7 @@ func _setup_customer_slots() -> void:
 func start() -> void:
 	money = 0
 	happiness = 100
+	cutomerHappiness = 0
 	_setup_customer_slots()
 	isRunning = true
 	emit_signal("money_updated", money)
@@ -62,8 +64,10 @@ func add_money(var change : int):
 	emit_signal("money_updated", self.money)
 
 func update_happiness(var change : int):
-	change = max(0, min(change, 100))
+	self.customerHappiness += change
 	self.happiness += change
+	# warning-ignore:narrowing_conversion
+	happiness = max(0, min(100, happiness))
 	emit_signal("happiness_updated", happiness)
 
 func has_free_customer_slot() -> bool :
@@ -86,8 +90,8 @@ func free_slot(customer_data: CustomerData):
 
 func handle_reward(customer_data: CustomerData):
 	# warning-ignore:integer_division
-	var customer_happiness = customer_data.task.startedAt * 100 / customer_data.task.waitingTime
 	if customer_data.task.taskFailed:
+		update_happiness(-10)
 		return
-	update_happiness(customer_happiness)
+	update_happiness(20)
 	add_money(customer_data.task.reward)
