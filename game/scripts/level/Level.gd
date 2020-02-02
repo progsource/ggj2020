@@ -86,7 +86,7 @@ func _process(delta):
 			try_assemble_station($Room0/AssembleStation3)
 		elif $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
-				$Room0/WeldingStation.hold_item($Player.held_item)
+				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
@@ -101,7 +101,6 @@ func _process(delta):
 
 			emit_signal("player_started_welding")
 			player_is_welding = true
-			pass # here the progress has to start and tick as long as it is pressed
 		if $Room0/AssembleStation/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation)
 		elif $Room0/AssembleStation2/Area2D.overlaps_body($Player):
@@ -114,7 +113,6 @@ func _process(delta):
 		emit_signal("player_stopped_assembling")
 		player_is_welding = false
 		player_is_assembling = false
-		pass # stop timer - hint on explosion this has to be set also to false
 
 
 func try_pickup_item(var counter : KinematicBody2D) :
@@ -125,7 +123,7 @@ func try_pickup_item(var counter : KinematicBody2D) :
 		$Player.hold_item(item_index, index)
 		emit_signal("item_picked_up", index)
 	elif $Player.held_item > -1 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
-		counter.hold_item($Player.held_item)
+		counter.hold_item($Player.held_item, $Player.get_slot_index())
 		$Player.drop_item()
 
 func try_washing_machine(var machine : KinematicBody2D):
@@ -216,6 +214,9 @@ func _on_device_returned(var slot_index : int, var device_index : int, var origi
 	if original_slot_index != slot_index:
 		customer_slot.customer_data.task.taskFailed = true
 		counter_stations[slot_index].explode_item()
+		var other_customer = level_data.customer_slots[original_slot_index]
+		other_customer.customer_data.task.taskFailed = true
+		#counter_stations[original_slot_index].explode_item() # actually this should kill the device no matter where it is at the moment
 	elif customer_slot.customer_data.task.get_current_requirement() != null:
 		customer_slot.customer_data.task.taskFailed = true
 		counter_stations[slot_index].explode_item()
