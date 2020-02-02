@@ -73,7 +73,16 @@ func get_next_free_slot() -> CustomerSlot :
 func free_slot(customer_data: CustomerData):
 	for i in range(customer_slots.size()):
 		if customer_slots[i].customer_data == customer_data:
+			handle_reward(customer_data)
 			customer_slots[i] = CustomerSlot.new()
 			customer_slots[i].position = customer_slot_positions[i]
 			customer_slots[i].pickup_position = pickup_slot_positions[i]
 			return
+
+func handle_reward(customer_data: CustomerData):
+	# warning-ignore:integer_division
+	var customer_happiness = customer_data.task.startedAt * 100 / customer_data.task.waitingTime
+	if customer_data.task.taskFailed:
+		return
+	update_happiness(customer_happiness)
+	add_money(customer_data.task.reward)
