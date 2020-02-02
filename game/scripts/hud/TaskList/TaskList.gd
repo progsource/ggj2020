@@ -71,10 +71,11 @@ func TweenComplete(object, key):
 	match str(key):
 		":modulate:a":
 			var customer_data = object.customer_data
-			remove_child(object)
-			if !customer_data.task.taskCompleted:
-				customer_data.task.taskFailed = true
-			move_Tasks()
+			if has_node(object.name):
+				remove_child(object)
+				if !customer_data.task.taskCompleted:
+					customer_data.task.taskFailed = true
+				move_Tasks()
 
 func move_Tasks():
 	var pos = 0
