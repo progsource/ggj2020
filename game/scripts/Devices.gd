@@ -1,6 +1,6 @@
 extends Node2D
 
-#signal item_exploded
+signal item_exploded
 
 var items = {}
 var customer_data: CustomerData = null
@@ -31,6 +31,15 @@ func _ready():
 
 	hide_items()
 
+func set_slot(var slot_index : int) :
+	if slot > -1:
+		get_tree().root.get_node("Level").level_data.customer_slots[slot].disconnect("exploded", self, "_on_item_exploded")
+	
+	slot = slot_index
+	
+	if slot_index >= 0:
+		get_tree().root.get_node("Level").level_data.customer_slots[slot_index].connect("exploded", self, "_on_item_exploded")
+	
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -38,6 +47,8 @@ func _process(delta):
 		$Explosion.stop()
 		hide_items()
 		$Explosion.frame = 0
+		emit_signal("item_exploded", slot)
+		slot = -1
 
 	if customer_data == null:
 		return
@@ -66,3 +77,7 @@ func explode() -> void :
 func _on_item_picked_up(slot_index):
 	if slot == slot_index:
 		hide_items()
+
+func _on_item_exploded(var slot_index : int):
+	if slot_index == slot:
+		explode()

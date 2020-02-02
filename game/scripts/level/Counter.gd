@@ -13,9 +13,10 @@ func _ready():
 	$Sprite.flip_h = has_mirrored_sprite
 
 
+
 func hold_item(var index : int, var original_slot_index : int):
 	$Items.display(index)
-	$Items.slot = original_slot_index
+	$Items.set_slot(original_slot_index)
 	emit_signal("device_returned", slot_index, index, original_slot_index)
 
 func remove_item():

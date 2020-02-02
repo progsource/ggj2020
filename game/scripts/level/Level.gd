@@ -51,6 +51,8 @@ func _ready():
 	$Room0/WashMachine.index = 4
 	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
 	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
+	
+	$Room0/WeldingStation.connect("welding_finished", self, "_on_welding_finished")
 
 
 # warning-ignore:unused_argument
@@ -99,7 +101,7 @@ func _process(delta):
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
 
-			emit_signal("player_started_welding")
+			$Room0/WeldingStation.start_welding()
 			player_is_welding = true
 		if $Room0/AssembleStation/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation)
@@ -108,8 +110,8 @@ func _process(delta):
 		elif $Room0/AssembleStation3/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation3)
 
-	elif Input.is_action_just_released("take_action") && player_is_welding:
-		emit_signal("player_stopped_welding")
+	elif Input.is_action_just_released("take_action") && (player_is_welding || player_is_assembling):
+		$Room0/WeldingStation.stop_welding()
 		emit_signal("player_stopped_assembling")
 		player_is_welding = false
 		player_is_assembling = false
@@ -224,3 +226,13 @@ func _on_device_returned(var slot_index : int, var device_index : int, var origi
 	else:
 		customer_slot.customer_data.task.taskCompleted = true
 	
+func _on_welding_finished(var slot_index : int):
+	print("welding finished %d" % slot_index)
+	var customer_slot = level_data.customer_slots[slot_index]
+	var requirement = customer_slot.customer_data.task.get_current_requirement()
+	print("req indx %d" % requirement.requirement_index)
+	if requirement.requirement_index != 11:
+		customer_slot.explode()
+		return
+	
+	requirement.requirement_satisfied = true

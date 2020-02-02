@@ -28,10 +28,15 @@ const pickup_slot_positions = [
 ]
 
 class CustomerSlot:
+	signal exploded(index)
 	var index : int = -1
 	var position := Vector2(0, 0)
 	var pickup_position := Vector2(0, 0)
 	var customer_data : CustomerData = null
+	func explode():
+		emit_signal("exploded", index)
+		if customer_data:
+			customer_data.task.taskFailed = true
 
 func _setup_customer_slots() -> void:
 	customer_slots.clear()

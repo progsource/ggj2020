@@ -33,3 +33,5 @@ position = Vector2( -16, -18 )
 shape = SubResource( 2 )
 
 [node name="Items" parent="." instance=ExtResource( 3 )]
+
+[node name="Timer" type="Timer" parent="."]

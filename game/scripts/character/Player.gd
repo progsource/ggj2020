@@ -8,6 +8,7 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
+	$Items.connect("item_exploded", self, "_on_item_exploded")
 
 
 func _physics_process(delta):
@@ -51,21 +52,26 @@ func animate_player(direction: Vector2):
 func hold_item(var item_index : int, var slot_index : int):
 	assert($Items)
 	$Items.display(item_index)
-	$Items.slot = slot_index
+	$Items.set_slot(slot_index)
 	$ItemAnimation.play("item_hover")
 	held_item = item_index
 
 func drop_item():
 	$Items.hide_items()
-	$Items.slot = -1
+	$Items.set_slot(-1)
 	$ItemAnimation.stop()
 	held_item = -1
 
 func explode_item():
 	$Items.explode()
-	$Items.slot = -1
+	$Items.set_slot(-1)
 	$ItemAnimation.stop()
 	held_item = -1
 
 func get_slot_index() -> int :
 	return $Items.slot
+
+func _on_item_exploded():
+	$Items.set_slot(-1)
+	$ItemAnimation.stop()
+	held_item = -1
