@@ -8,6 +8,7 @@ var index = -1
 
 
 func _ready():
+# warning-ignore:return_value_discarded
 	$Timer.connect("timeout", self, "_on_timeout")
 	$Items.connect("item_exploded", self, "_on_item_exploded")
 	_update_progress_bar()
@@ -34,8 +35,9 @@ func _on_player_started_assembling(var station_index):
 	left_welding_time = welding_time
 	$Timer.start()
 
-func _on_player_stopped_assembling():
-	$Timer.paused = true
+func _on_player_stopped_assembling(var station_index):
+	if index == station_index:
+		$Timer.paused = true
 
 func _on_timeout():
 	left_welding_time -= 1
