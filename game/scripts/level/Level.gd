@@ -48,7 +48,7 @@ func _ready():
 		connect("player_stopped_assembling", assemble_stations[i], "_on_player_stopped_assembling")
 		assemble_stations[i].connect("assembling_finished", self, "_on_assembling_finished")
 
-	$Room0/WashMachine.index = 1
+	$Room0/WashMachine.index = 4
 	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
 	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
 
@@ -92,7 +92,7 @@ func _process(delta):
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
 		elif $Room0/WashMachine/Area2D.overlaps_body($Player):
-			emit_signal("player_started_washing", 1)
+			try_washing_machine($Room0/WashMachine)
 	elif Input.is_action_just_pressed("take_action"):
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
@@ -128,6 +128,14 @@ func try_pickup_item(var counter : KinematicBody2D) :
 		counter.hold_item($Player.held_item)
 		$Player.drop_item()
 
+func try_washing_machine(var machine : KinematicBody2D):
+	if $Player.held_item == -1 && machine.held_item != -1 && !machine.washing:
+		$Player.hold_item(machine.held_item, machine.index)
+		machine.remove_item()
+	elif machine.held_item == -1 && $Player.held_item != -1:
+		machine.hold_item($Player.held_item, machine.index)
+		$Player.drop_item()
+		emit_signal("player_started_washing", machine.index)
 
 func try_assemble_station(var station : KinematicBody2D):
 	if $Player.held_item == -1:
