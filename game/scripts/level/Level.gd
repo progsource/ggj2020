@@ -181,7 +181,8 @@ func stop() -> void :
 	level_data.stop()
 	$CustomerSpawnTimer.stop()
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://scenes/splash.tscn")
+	GlobalData.score = level_data
+	get_tree().change_scene("res://scenes/Highscore.tscn")
 
 func _spawn_customer() -> void :
 	$CustomerSpawnTimer.wait_time = 6
