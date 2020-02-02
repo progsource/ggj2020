@@ -17,6 +17,12 @@ func hold_item(var index : int, var slot_index : int):
 	$Items.slot = slot_index
 	held_item = index
 
+func explode_item():
+	$Items.explode()
+	$Items.slot = -1
+	held_item = -1
+	$Timer.stop()
+
 func remove_item():
 	held_item = -1
 	$Items.hide_items()
@@ -35,6 +41,7 @@ func _on_player_stopped_assembling(var station_index):
 func _on_timeout():
 	left_welding_time -= 1
 	if left_welding_time <= 0:
+		$Timer.stop()
 		emit_signal("assembling_finished", index)
 	_update_progress_bar()
 

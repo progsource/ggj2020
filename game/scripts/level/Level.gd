@@ -93,7 +93,6 @@ func _process(delta):
 			player_is_welding = true
 			pass # here the progress has to start and tick as long as it is pressed
 		if $Room0/AssembleStation/Area2D.overlaps_body($Player):
-			# TODO: check if it holds correct stuff or no stuff - else explode
 			try_start_to_assemble($Room0/AssembleStation)
 		elif $Room0/AssembleStation2/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation2)
@@ -129,16 +128,18 @@ func try_assemble_station(var station : KinematicBody2D):
 		if station.held_item == -1:
 			station.hold_item($Player.held_item, station.index)
 			$Player.drop_item()
-	#else: # the held item must be a screw or a display
-	#	if station.held_item != -1:
 
-	#		emit_signal("player_started_assembling", station.index)
-
-func try_start_to_assemble(var station : KinematicBody2D) -> bool :
+func try_start_to_assemble(var station : KinematicBody2D) -> void :
 	if station.held_item != -1 && ($Player.held_item == 9 || $Player.held_item == 10):
-		emit_signal("player_started_assembling", station.index)
-		return true
-	return false
+		var slot_index = station.get_slot_index()
+		var customer_slot = level_data.customer_slots[slot_index]
+		var requirement = customer_slot.customer_data.task.get_current_requirement()
+		if !requirement || requirement.requirement_index != $Player.held_item:
+			$Player.drop_item()
+			station.explode_item()
+			customer_slot.customer_data.task.taskFailed = true
+		else:
+			emit_signal("player_started_assembling", station.index)
 
 func _on_start_button_pressed():
 	GlobalData.currently_in_use_devices.clear()
@@ -184,4 +185,9 @@ func _on_customer_spawn_timer_timeout():
 		_spawn_customer()
 
 func _on_assembling_finished(var station_index : int):
+	print(station_index)
 	$Player.drop_item()
+	var slot_index = assemble_stations[station_index].get_slot_index()
+
+	var customer_slot = level_data.customer_slots[slot_index]
+	customer_slot.customer_data.task.requirements[0].requirement_satisfied = true
