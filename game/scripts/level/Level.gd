@@ -12,6 +12,7 @@ var level_data := LevelData.new()
 onready var devices_packed = preload("res://packed/items/Items.tscn")
 var player_is_welding : bool = false
 var player_is_assembling : bool = false
+var assemble_stations = []
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -24,18 +25,17 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
-	$Room0/AssembleStation.index = 0
-	connect("player_started_assembling", $Room0/AssembleStation, "_on_player_started_assembling")
-	connect("player_stopped_assembling", $Room0/AssembleStation, "_on_player_stopped_assembling")
-	$Room0/AssembleStation.connect("assembling_finished", self, "_on_assembling_finished")
-	$Room0/AssembleStation2.index = 1
-	connect("player_started_assembling", $Room0/AssembleStation2, "_on_player_started_assembling")
-	connect("player_stopped_assembling", $Room0/AssembleStation2, "_on_player_stopped_assembling")
-	$Room0/AssembleStation2.connect("assembling_finished", self, "_on_assembling_finished")
-	$Room0/AssembleStation3.index = 2
-	connect("player_started_assembling", $Room0/AssembleStation3, "_on_player_started_assembling")
-	connect("player_stopped_assembling", $Room0/AssembleStation3, "_on_player_stopped_assembling")
-	$Room0/AssembleStation3.connect("assembling_finished", self, "_on_assembling_finished")
+		
+	assemble_stations.push_back($Room0/AssembleStation)
+	assemble_stations.push_back($Room0/AssembleStation2)
+	assemble_stations.push_back($Room0/AssembleStation3)
+	
+	for i in range(assemble_stations.size()):
+		assemble_stations[i].index = i
+		connect("player_started_assembling", assemble_stations[i], "_on_player_started_assembling")
+		connect("player_stopped_assembling", assemble_stations[i], "_on_player_stopped_assembling")
+		assemble_stations[i].connect("assembling_finished", self, "_on_assembling_finished")
+
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -176,6 +176,5 @@ func _on_customer_spawn_timer_timeout():
 		_spawn_customer()
 
 func _on_assembling_finished(var station_index : int):
-	print("level says assemble done")
-	pass
-	
+	$Player.drop_item()
+
