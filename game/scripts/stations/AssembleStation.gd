@@ -35,4 +35,6 @@ func _on_timeout():
 	_update_progress_bar()
 
 func _update_progress_bar():
-	$StationProgressBar.update_progress(left_welding_time / welding_time)
+	var percentage = left_welding_time / welding_time
+	$StationProgressBar.update_progress(percentage)
+	$StationProgressBar.visible = percentage > 0
