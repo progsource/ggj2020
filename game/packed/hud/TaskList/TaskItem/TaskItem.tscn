@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://scripts/hud/TaskList/TaskItem/TaskIcon.gd" type="Script" id=1]
-
-[node name="TaskIcon" type="Sprite"]
-region_enabled = true
-region_rect = Rect2( 0, 0, 50, 50 )
-script = ExtResource( 1 )

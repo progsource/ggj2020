@@ -229,9 +229,11 @@ func init_random_values() -> void:
 	task = Task.new()
 	task.device = Device.new()
 	task.device.sprite_index = rng.randi_range(0, 8) # TODO: do this based on available device types
-	var requirements_count = rng.randi_range(0, 4)
+	var requirements_count = rng.randi_range(1, 4)
 	for _i in range(requirements_count):
-		task.requirements.push_back(rng.randi_range(9, 12))
+		var requirement = Requirement.new()
+		requirement.requirement_index = rng.randi_range(9, 12)
+		task.requirements.push_back(requirement)
 	base_money = rng.randi_range(2, 14)
 	var time = rng.randi_range(60, 180)
 	task.waitingTime = time

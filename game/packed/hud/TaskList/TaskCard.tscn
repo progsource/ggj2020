@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://packed/items/Items.tscn" type="PackedScene" id=1]
 [ext_resource path="res://packed/hud/TaskList/TaskItem/TaskTimer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/hud/TaskList/TaskCard.gd" type="Script" id=3]
+[ext_resource path="res://packed/hud/TaskList/TaskItem/TaskRequirements.tscn" type="PackedScene" id=4]
 
 [node name="TaskCard" type="Node2D"]
 script = ExtResource( 3 )
 __meta__ = {
+"_edit_group_": true,
 "_editor_description_": "Manages a Task
 
 Displays
@@ -29,7 +31,13 @@ __meta__ = {
 }
 
 [node name="Devices" parent="." instance=ExtResource( 1 )]
-position = Vector2( 17.8651, 17.3042 )
+position = Vector2( 16, 10 )
+
+[node name="Requirements" parent="." instance=ExtResource( 4 )]
+margin_left = 1.0
+margin_top = 21.0
+margin_right = 33.0
+margin_bottom = 33.0
 
 [node name="TaskTimer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 34 )
