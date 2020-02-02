@@ -57,7 +57,7 @@ func _ready():
 	$Room0/WashMachine.connect("washing_finished", self, "_on_washing_finished")
 
 	$Room0/WeldingStation.connect("welding_finished", self, "_on_welding_finished")
-
+	bind_player_to_leave()
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -65,7 +65,6 @@ func _process(delta):
 		return
 
 	if Input.is_action_just_released("ui_accept"):
-		$Player/Inputs.hide_inputs()
 		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
 				$Player.hold_item(9, -1)
@@ -106,7 +105,6 @@ func _process(delta):
 		elif $Room0/WashMachine/Area2D.overlaps_body($Player):
 			try_washing_machine($Room0/WashMachine)
 	elif Input.is_action_just_pressed("take_action"):
-		$Player/Inputs.hide_inputs()
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
@@ -123,7 +121,6 @@ func _process(delta):
 			try_start_to_assemble($Room0/AssembleStation3)
 
 	elif Input.is_action_just_released("take_action") && (player_is_welding || player_is_assembling):
-		$Player/Inputs.hide_inputs()
 		$Room0/WeldingStation.stop_welding()
 		emit_signal("player_stopped_assembling")
 		player_is_welding = false
@@ -287,10 +284,48 @@ func check_for_input_hint():
 	for node in $Room0.get_children():
 		if node is KinematicBody2D:
 			if "slot_index" in node && node.slot_index != -1:
-				check_node_for_input_hint(node)
+				check_counter_for_input_hint(node)
 			else:
 				check_node_for_input_hint(node)
 
 func check_node_for_input_hint(node: KinematicBody2D):
 	if node.get_node("Area2D").overlaps_body($Player):
-		$Player/Inputs.display(1)
+		if "welding_time" in node:
+			if node.get_slot_index() != -1:
+				if ($Player.held_item == 9 or $Player.held_item == 10):
+					$Player/Inputs.display(1)
+			elif $Player.held_item != -1:
+				$Player/Inputs.display(0)
+		if "washing_time" in node:
+			if node.get_slot_index() == -1 && $Player.held_item != -1:
+				$Player/Inputs.display(0)
+			elif node.get_slot_index() != -1 && $Player.held_item == -1 && !node.washing:
+				$Player/Inputs.display(0)
+		if "SECONDS_TO_WELD" in node:
+			if node.get_slot_index() == -1 && $Player.held_item != -1:
+				$Player/Inputs.display(0)
+			elif node.get_slot_index() != -1 && $Player.held_item == -1 && node.left_welding_time >= 1:
+				$Player/Inputs.display(1)
+			elif node.get_slot_index() != -1 && $Player.held_item == -1 && node.left_welding_time <= 0:
+				$Player/Inputs.display(0)
+
+func check_counter_for_input_hint(node: KinematicBody2D):
+	if node.get_node("Area2D").overlaps_body($Player):
+		if $Player.held_item == -1:
+			$Player/Inputs.display(0)
+
+func bind_player_to_leave():
+	for node in $Room0.get_children():
+		if node is KinematicBody2D:
+			if "slot_index" in node && node.slot_index != -1:
+				node.get_node("Area2D").connect(
+					"body_exited",
+					$Player,
+					"_on_body_exited"
+				)
+			else:
+				node.get_node("Area2D").connect(
+					"body_exited",
+					$Player,
+					"_on_body_exited"
+				)

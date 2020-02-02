@@ -75,3 +75,6 @@ func _on_item_exploded():
 	$Items.set_slot(-1)
 	$ItemAnimation.stop()
 	held_item = -1
+
+func _on_body_exited(body: Node):
+	$Inputs.hide_inputs()
