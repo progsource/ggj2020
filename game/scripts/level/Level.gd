@@ -120,6 +120,7 @@ func try_pickup_item(var counter : KinematicBody2D) :
 	if $Player.held_item == -1 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
 		var item_index = level_data.customer_slots[index].customer_data.task.device.sprite_index
 		level_data.customer_slots[index].customer_data.task.taskStarted = true
+		counter.remove_item()
 		$Player.hold_item(item_index, index)
 		emit_signal("item_picked_up", index)
 	elif $Player.held_item > -1 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
