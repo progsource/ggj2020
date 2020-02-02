@@ -6,6 +6,8 @@ signal player_started_welding
 signal player_stopped_welding
 signal player_started_assembling(assemble_station_index)
 signal player_stopped_assembling
+signal player_started_washing(station_id)
+signal player_stopped_washing
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
@@ -36,6 +38,9 @@ func _ready():
 	connect("player_started_assembling", $Room0/AssembleStation3, "_on_player_started_assembling")
 	connect("player_stopped_assembling", $Room0/AssembleStation3, "_on_player_stopped_assembling")
 	$Room0/AssembleStation3.connect("assembling_finished", self, "_on_assembling_finished")
+	$Room0/WashMachine.index = 0
+	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
+	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -75,6 +80,8 @@ func _process(delta):
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
+		elif $Room0/WashMachine/Area2D.overlaps_body($player):
+			emit_signal("player_started_washing", 1)
 	elif Input.is_action_just_pressed("take_action"):
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
