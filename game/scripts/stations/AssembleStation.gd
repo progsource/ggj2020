@@ -35,9 +35,8 @@ func _on_player_started_assembling(var station_index):
 	left_welding_time = welding_time
 	$Timer.start()
 
-func _on_player_stopped_assembling(var station_index):
-	if index == station_index:
-		$Timer.paused = true
+func _on_player_stopped_assembling():
+	$Timer.paused = true
 
 func _on_timeout():
 	left_welding_time -= 1
