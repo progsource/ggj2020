@@ -11,7 +11,7 @@
 [node name="Inputs" type="Node"]
 script = ExtResource( 7 )
 
-[node name="Confirm" type="Node" parent="."]
+[node name="Confirm" type="Node2D" parent="."]
 
 [node name="Key" type="TextureRect" parent="Confirm"]
 margin_right = 100.0
@@ -42,7 +42,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Action" type="Node" parent="."]
+[node name="Action" type="Node2D" parent="."]
 
 [node name="Key" type="TextureRect" parent="Action"]
 margin_right = 100.0

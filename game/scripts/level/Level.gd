@@ -27,7 +27,6 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
-		start_button.connect("start_button_pressed", $HUD/TaskList, "_on_start_button_pressed")
 
 	counter_stations.push_back($Room0/Counter)
 	counter_stations.push_back($Room0/Counter3)
@@ -58,6 +57,9 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _process(delta):
+	if !level_data.isRunning:
+		return
+
 	if Input.is_action_just_released("ui_accept"):
 		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
@@ -116,6 +118,8 @@ func _process(delta):
 		emit_signal("player_stopped_assembling")
 		player_is_welding = false
 		player_is_assembling = false
+	else:
+		check_for_input_hint()
 
 
 func try_pickup_item(var counter : KinematicBody2D) :
@@ -257,3 +261,15 @@ func _on_welding_finished(var slot_index : int):
 		return
 
 	requirement.requirement_satisfied = true
+
+func check_for_input_hint():
+	for node in $Room0.get_children():
+		if node is KinematicBody2D:
+			if "slot_index" in node && node.slot_index != -1:
+				check_node_for_input_hint(node)
+			else:
+				check_node_for_input_hint(node)
+
+func check_node_for_input_hint(node: KinematicBody2D):
+	if node.get_node("Area2D").overlaps_body($Player):
+		node.get_node("Inputs").display(1)
