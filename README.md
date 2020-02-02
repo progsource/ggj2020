@@ -46,8 +46,11 @@ A Global Game Jam project
 * game/assets/audo/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav -> https://freesound.org/people/Sirderf/sounds/332310/
 * game/assets/audo/336998__tim-kahn__awww-01.wav -> https://freesound.org/people/tim.kahn/sounds/336998/
 * game/assets/audo/437645__dersuperanton__crowd-wow-surprise-people.wav -> https://freesound.org/people/dersuperanton/sounds/437645/
-
-
+* game/assets/audo/422651__trullilulli__sfx-player-action-phone-pick-up.wav -> https://freesound.org/people/trullilulli/sounds/422651/
+* game/assets/audo/361564__matthewwong__ding-dong.wav -> https://freesound.org/people/MatthewWong/sounds/361564/
+*  game/assets/audo/81098__lg__electric-screwdriver-04.wav -> https://freesound.org/people/LG/sounds/81098/
+* game/assets/audo/131364__kaonaya__washing-machine-1.wav -> https://freesound.org/people/kaonaya/sounds/131364/
+* game/assets/audio/472638__loberg77__welding.wav -> https://freesound.org/people/loberg77/sounds/472638/
 ## For later reading pleasure
 
  - https://www.gdquest.com/tutorial/game-design/godot/30-days-free-game-creation-tutorial/
