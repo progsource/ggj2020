@@ -1,7 +1,9 @@
 # ggj2020
 A Global Game Jam project
 
-![](screenshot.png)
+[Play it on https://progsource.github.io/ggj2020/](https://progsource.github.io/ggj2020/)
+
+[![](screenshot.png)](https://progsource.github.io/ggj2020/)
 
 
 ## Ideas
