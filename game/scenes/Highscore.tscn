@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Highscore.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/pixel_lcd-7.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/img/progsource/dollar.png" type="Texture" id=4]
+[ext_resource path="res://assets/img/progsource/smiley.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/progsource/checkmark.png" type="Texture" id=6]
+[ext_resource path="res://scripts/hud/StartButton.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 border_width_left = 3
@@ -39,6 +43,7 @@ margin_left = 175.0
 margin_top = 100.0
 margin_right = 191.0
 margin_bottom = 116.0
+texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,6 +67,7 @@ margin_left = 175.0
 margin_top = 120.0
 margin_right = 191.0
 margin_bottom = 136.0
+texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -85,6 +91,7 @@ margin_left = 175.0
 margin_top = 140.0
 margin_right = 191.0
 margin_bottom = 156.0
+texture = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,8 +115,10 @@ margin_right = 280.0
 margin_bottom = 220.0
 custom_fonts/font = ExtResource( 1 )
 text = "Restart"
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="start_button_pressed" from="Button" to="." method="_on_Button_start_button_pressed"]
