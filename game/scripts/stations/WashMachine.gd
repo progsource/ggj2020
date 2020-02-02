@@ -17,7 +17,7 @@ func hold_item(var item_index : int, var slot_index : int):
 	print("%d should be shown" % item_index)
 	print("from slot %d" % slot_index)
 	$Items.display(item_index)
-	$Items.slot = slot_index
+	$Items.set_slot(slot_index)
 	$Items.modulate = Color(1, 1, 1, 0.7)
 	held_item = item_index
 

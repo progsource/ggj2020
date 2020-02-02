@@ -175,6 +175,7 @@ func _on_start_button_pressed():
 func start() -> void :
 	level_data.start()
 	$CustomerSpawnTimer.start()
+	_spawn_customer()
 
 func stop() -> void :
 	level_data.stop()
