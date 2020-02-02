@@ -81,7 +81,7 @@ func _process(delta):
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
-		elif $Room0/WashMachine/Area2D.overlaps_body($player):
+		elif $Room0/WashMachine/Area2D.overlaps_body($Player):
 			emit_signal("player_started_washing", 1)
 	elif Input.is_action_just_pressed("take_action"):
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
