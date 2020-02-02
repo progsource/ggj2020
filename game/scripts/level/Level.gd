@@ -97,9 +97,11 @@ func _process(delta):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
+				$ItemMove.play()
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
+				$ItemMove.play()
 		elif $Room0/WashMachine/Area2D.overlaps_body($Player):
 			try_washing_machine($Room0/WashMachine)
 	elif Input.is_action_just_pressed("take_action"):
@@ -107,8 +109,9 @@ func _process(delta):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
-
+				$ItemMove.play()
 			$Room0/WeldingStation.start_welding()
+			$Welding.play()
 			player_is_welding = true
 		if $Room0/AssembleStation/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation)
@@ -134,9 +137,11 @@ func try_pickup_item(var counter : KinematicBody2D) :
 		counter.remove_item()
 		$Player.hold_item(item_index, counter_slot_index)
 		emit_signal("item_picked_up", counter_slot_index)
+		$ItemMove.play()
 	elif $Player.held_item > -1 && counter.get_sprite_index() < 0 && $Player.held_item < 9 && level_data.customer_slots[counter_slot_index] && level_data.customer_slots[counter_slot_index].customer_data:
 		counter.hold_item($Player.held_item, $Player.get_slot_index())
 		$Player.drop_item()
+		$ItemMove.play()
 
 func try_washing_machine(var station : KinematicBody2D):
 	if $Player.held_item == -1 && station.held_item != -1 && !station.washing:
@@ -154,16 +159,19 @@ func try_washing_machine(var station : KinematicBody2D):
 			station.hold_item($Player.held_item, $Player.get_slot_index())
 			$Player.drop_item()
 			emit_signal("player_started_washing", station.index)
+			$WashingMachine.play()
 
 func try_assemble_station(var station : KinematicBody2D):
 	if $Player.held_item == -1:
 		if station.held_item != -1:
 			$Player.hold_item(station.held_item, station.get_slot_index())
 			station.remove_item()
+			$ItemMove.play()
 	elif $Player.held_item < 9: # player is holding device
 		if station.held_item == -1:
 			station.hold_item($Player.held_item, $Player.get_slot_index())
 			$Player.drop_item()
+			$ItemMove.play()
 
 func try_start_to_assemble(var station : KinematicBody2D) -> void :
 	print("#####try_start_to_assemble")
@@ -183,6 +191,7 @@ func try_start_to_assemble(var station : KinematicBody2D) -> void :
 			customer_slot.explode()
 		else:
 			emit_signal("player_started_assembling", station.index)
+			$Assemble.play()
 	print("#####try_start_to_assemble###############")
 
 func _on_start_button_pressed():
@@ -217,6 +226,7 @@ func _spawn_customer() -> void :
 	emit_signal("new_task_added", customer_slot.customer_data)
 
 	counter_stations[customer_slot.index].hold_item(customer_slot.customer_data.task.device.sprite_index, customer_slot.index, false)
+	$CustomerIncoming.play()
 
 # warning-ignore:unused_argument
 func _despawn_customer(customer_data: CustomerData):

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/422651__trullilulli__sfx-player-action-phone-pick-up.wav-433b0c8206949e9dd1660d7cadd806d2.sample"
+
+[deps]
+
+source_file="res://assets/audio/422651__trullilulli__sfx-player-action-phone-pick-up.wav"
+dest_files=[ "res://.import/422651__trullilulli__sfx-player-action-phone-pick-up.wav-433b0c8206949e9dd1660d7cadd806d2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

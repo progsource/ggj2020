@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/472638__loberg77__welding.wav-b0dcffd87342cc4a62f50533d011689f.sample"
+
+[deps]
+
+source_file="res://assets/audio/472638__loberg77__welding.wav"
+dest_files=[ "res://.import/472638__loberg77__welding.wav-b0dcffd87342cc4a62f50533d011689f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

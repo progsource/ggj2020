@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://packed/character/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://packed/hud/Hud.tscn" type="PackedScene" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://assets/audio/504885__selcukartut__nature-sounds-quiet-environment.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/audio/336998__tim-kahn__awww-01.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audio/422651__trullilulli__sfx-player-action-phone-pick-up.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audio/361564__matthewwong__ding-dong.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/audio/81098__lg__electric-screwdriver-04.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/audio/131364__kaonaya__washing-machine-1.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/audio/472638__loberg77__welding.wav" type="AudioStream" id=12]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 4 )
@@ -28,3 +33,18 @@ stream = ExtResource( 6 )
 
 [node name="TaskFailedSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+
+[node name="ItemMove" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+
+[node name="CustomerIncoming" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+
+[node name="Assemble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+
+[node name="WashingMachine" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+
+[node name="Welding" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/81098__lg__electric-screwdriver-04.wav-cf93d61e19b9288a26c9a8caef8c536e.sample"
+
+[deps]
+
+source_file="res://assets/audio/81098__lg__electric-screwdriver-04.wav"
+dest_files=[ "res://.import/81098__lg__electric-screwdriver-04.wav-cf93d61e19b9288a26c9a8caef8c536e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

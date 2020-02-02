@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/361564__matthewwong__ding-dong.wav-aa33625bb63a2d18a5481efe1d8e01b4.sample"
+
+[deps]
+
+source_file="res://assets/audio/361564__matthewwong__ding-dong.wav"
+dest_files=[ "res://.import/361564__matthewwong__ding-dong.wav-aa33625bb63a2d18a5481efe1d8e01b4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

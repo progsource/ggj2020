@@ -1,9 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/img/tileset/Tiles/PNG_version_2/Walls/Floor1.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/pixel_lcd-7.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scripts/splash_button.gd" type="Script" id=4]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_D.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_A.png" type="Texture" id=6]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_W.png" type="Texture" id=7]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_Arrow_Up.png" type="Texture" id=8]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_S.png" type="Texture" id=9]
+[ext_resource path="res://assets/img/input/action/XboxOne_B.png" type="Texture" id=10]
+[ext_resource path="res://assets/img/input/confirm/XboxOne_A.png" type="Texture" id=11]
+[ext_resource path="res://assets/img/input/confirm/Keyboard_Black_Enter_Alt.png" type="Texture" id=12]
+[ext_resource path="res://assets/img/input/confirm/PS4_Cross.png" type="Texture" id=13]
+[ext_resource path="res://assets/img/input/action/PS4_Circle.png" type="Texture" id=14]
+[ext_resource path="res://assets/img/input/action/Keyboard_Black_R.png" type="Texture" id=15]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_Arrow_Down.png" type="Texture" id=16]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_Arrow_Left.png" type="Texture" id=17]
+[ext_resource path="res://assets/img/input/move/Keyboard_Black_Arrow_Right.png" type="Texture" id=18]
 
 [node name="Background" type="TextureRect"]
 margin_right = 480.0
@@ -61,6 +75,115 @@ margin_bottom = 171.0
 custom_fonts/font = ExtResource( 1 )
 text = "PLAY!"
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Node2D" parent="."]
+position = Vector2( 41, 45 )
+scale = Vector2( 0.25, 0.25 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Keyboard_Black_W" type="Sprite" parent="move"]
+position = Vector2( 55, 160 )
+texture = ExtResource( 7 )
+
+[node name="Keyboard_Black_A" type="Sprite" parent="move"]
+position = Vector2( -26, 252 )
+texture = ExtResource( 6 )
+
+[node name="Keyboard_Black_S" type="Sprite" parent="move"]
+position = Vector2( 57, 253 )
+texture = ExtResource( 9 )
+
+[node name="Keyboard_Black_D" type="Sprite" parent="move"]
+position = Vector2( 149, 250 )
+texture = ExtResource( 5 )
+
+[node name="Keyboard_Black_Arrow_Up" type="Sprite" parent="move"]
+position = Vector2( 56, 359 )
+texture = ExtResource( 8 )
+
+[node name="Keyboard_Black_Arrow_Left" type="Sprite" parent="move"]
+position = Vector2( -36, 450 )
+texture = ExtResource( 17 )
+
+[node name="Keyboard_Black_Arrow_Down" type="Sprite" parent="move"]
+position = Vector2( 52, 453 )
+texture = ExtResource( 16 )
+
+[node name="Keyboard_Black_Arrow_Right" type="Sprite" parent="move"]
+position = Vector2( 148, 457 )
+texture = ExtResource( 18 )
+
+[node name="Label" type="Label" parent="move"]
+margin_left = -30.252
+margin_top = 60.504
+margin_right = 33.748
+margin_bottom = 84.504
+rect_rotation = -20.0
+custom_fonts/font = ExtResource( 3 )
+text = "MOVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="action" type="Node2D" parent="."]
+position = Vector2( 236.672, 118.689 )
+scale = Vector2( 0.25, 0.25 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Keyboard_Black_Enter_Alt" type="Sprite" parent="action"]
+position = Vector2( 419, 331 )
+texture = ExtResource( 12 )
+
+[node name="PS4_Cross" type="Sprite" parent="action"]
+position = Vector2( 368, 430 )
+texture = ExtResource( 13 )
+
+[node name="XboxOne_A" type="Sprite" parent="action"]
+position = Vector2( 478, 427 )
+texture = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="action"]
+margin_left = 363.024
+margin_top = 194.117
+margin_right = 458.024
+margin_bottom = 238.117
+custom_fonts/font = ExtResource( 3 )
+text = "ACTION"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="repair" type="Node2D" parent="."]
+position = Vector2( 261, 56 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Keyboard_Black_R" type="Sprite" parent="repair"]
+position = Vector2( 665, 312 )
+texture = ExtResource( 15 )
+
+[node name="PS4_Circle" type="Sprite" parent="repair"]
+position = Vector2( 629, 416 )
+texture = ExtResource( 14 )
+
+[node name="XboxOne_B" type="Sprite" parent="repair"]
+position = Vector2( 727, 413 )
+texture = ExtResource( 10 )
+
+[node name="Label2" type="Label" parent="repair"]
+margin_left = 658.988
+margin_top = 134.79
+margin_right = 863.988
+margin_bottom = 158.79
+rect_rotation = 40.0
+custom_fonts/font = ExtResource( 3 )
+text = "!!!REPAIR!!!!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
