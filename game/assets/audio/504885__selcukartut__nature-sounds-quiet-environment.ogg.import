@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/504885__selcukartut__nature-sounds-quiet-environment.ogg-81ac7309986e55c7d905616a1e2b2691.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/504885__selcukartut__nature-sounds-quiet-environment.ogg"
+dest_files=[ "res://.import/504885__selcukartut__nature-sounds-quiet-environment.ogg-81ac7309986e55c7d905616a1e2b2691.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

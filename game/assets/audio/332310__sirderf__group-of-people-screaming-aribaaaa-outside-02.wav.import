@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav-0c5730fa227cf8a70d174888ff49c431.sample"
+
+[deps]
+
+source_file="res://assets/audio/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav"
+dest_files=[ "res://.import/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav-0c5730fa227cf8a70d174888ff49c431.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

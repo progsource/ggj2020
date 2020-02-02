@@ -76,6 +76,7 @@ func hide_items() -> void :
 
 func explode() -> void :
 	$Explosion.play("default")
+	get_tree().root.get_node("Level/TaskFailedSound").play()
 
 func _on_item_picked_up(slot_index):
 	if slot == slot_index:

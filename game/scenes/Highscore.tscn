@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/monogram.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/Highscore.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/img/progsource/smiley.png" type="Texture" id=5]
 [ext_resource path="res://assets/img/progsource/checkmark.png" type="Texture" id=6]
 [ext_resource path="res://scripts/hud/StartButton.gd" type="Script" id=7]
+[ext_resource path="res://assets/audio/437645__dersuperanton__crowd-wow-surprise-people.wav" type="AudioStream" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 border_width_left = 3
@@ -120,5 +121,10 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+attenuation = 0.0103087
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 [connection signal="start_button_pressed" from="Button" to="." method="_on_Button_start_button_pressed"]

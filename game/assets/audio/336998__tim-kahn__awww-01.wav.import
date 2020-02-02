@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/336998__tim-kahn__awww-01.wav-56e68fcf8b94ab357b39e3601dbd95ab.sample"
+
+[deps]
+
+source_file="res://assets/audio/336998__tim-kahn__awww-01.wav"
+dest_files=[ "res://.import/336998__tim-kahn__awww-01.wav-56e68fcf8b94ab357b39e3601dbd95ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

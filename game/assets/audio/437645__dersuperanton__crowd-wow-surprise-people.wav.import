@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/437645__dersuperanton__crowd-wow-surprise-people.wav-6338fdf575925a0410f10a726b262e4d.sample"
+
+[deps]
+
+source_file="res://assets/audio/437645__dersuperanton__crowd-wow-surprise-people.wav"
+dest_files=[ "res://.import/437645__dersuperanton__crowd-wow-surprise-people.wav-6338fdf575925a0410f10a726b262e4d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

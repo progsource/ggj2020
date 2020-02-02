@@ -42,6 +42,12 @@ A Global Game Jam project
   ```
 * game/assets/img/dungeon_pack -> https://pixel-poem.itch.io/dungeon-assetpuck
 
+* game/assets/audio/504885__selcukartut__nature-sounds-quiet-environment -> https://freesound.org/people/selcukartut/sounds/504885/
+* game/assets/audo/332310__sirderf__group-of-people-screaming-aribaaaa-outside-02.wav -> https://freesound.org/people/Sirderf/sounds/332310/
+* game/assets/audo/336998__tim-kahn__awww-01.wav -> https://freesound.org/people/tim.kahn/sounds/336998/
+* game/assets/audo/437645__dersuperanton__crowd-wow-surprise-people.wav -> https://freesound.org/people/dersuperanton/sounds/437645/
+
+
 ## For later reading pleasure
 
  - https://www.gdquest.com/tutorial/game-design/godot/30-days-free-game-creation-tutorial/

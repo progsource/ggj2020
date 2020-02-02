@@ -192,6 +192,7 @@ func _on_start_button_pressed():
 func start() -> void :
 	level_data.start()
 	$CustomerSpawnTimer.start()
+	$BackgroundMusic.play()
 
 func stop() -> void :
 	level_data.stop()
@@ -256,6 +257,7 @@ func _on_device_returned(var slot_index : int, var device_index : int, var origi
 		counter_stations[slot_index].explode_item()
 	else:
 		customer_slot.customer_data.task.taskCompleted = true
+		$TaskDoneSound.play()
 
 func _on_welding_finished(var slot_index : int):
 	print("welding finished %d" % slot_index)
