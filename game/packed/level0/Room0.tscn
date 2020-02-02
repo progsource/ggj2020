@@ -28,45 +28,41 @@ position = Vector2( 48, 144 )
 
 [node name="Counter" parent="." instance=ExtResource( 3 )]
 position = Vector2( 336, 48 )
-scale = Vector2( 2, 2 )
 has_vertical_sprite = true
+slot_index = 0
 
 [node name="Counter2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 336, 80 )
-scale = Vector2( 2, 2 )
 has_vertical_sprite = true
 
 [node name="Counter3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 304, 112 )
-scale = Vector2( 2, 2 )
+slot_index = 1
 
 [node name="Counter4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 272, 112 )
-scale = Vector2( 2, 2 )
 
 [node name="Counter5" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 112 )
-scale = Vector2( 2, 2 )
+slot_index = 2
 
 [node name="Counter6" parent="." instance=ExtResource( 3 )]
 position = Vector2( 208, 112 )
-scale = Vector2( 2, 2 )
 
 [node name="Counter7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 176, 112 )
-scale = Vector2( 2, 2 )
+slot_index = 3
 
 [node name="Counter8" parent="." instance=ExtResource( 3 )]
 position = Vector2( 144, 80 )
-scale = Vector2( 2, 2 )
 has_vertical_sprite = true
 has_mirrored_sprite = true
 
 [node name="Counter9" parent="." instance=ExtResource( 3 )]
 position = Vector2( 144, 48 )
-scale = Vector2( 2, 2 )
 has_vertical_sprite = true
 has_mirrored_sprite = true
+slot_index = 4
 
 [node name="WashMachine" parent="." instance=ExtResource( 4 )]
 position = Vector2( 432, 176 )

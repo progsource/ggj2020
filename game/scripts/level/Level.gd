@@ -2,11 +2,16 @@ extends Node2D
 
 signal new_task_added(task)
 signal item_picked_up(slot_index)
+signal player_started_welding
+signal player_stopped_welding
+signal player_started_assembling(assemble_station_index)
+signal player_stopped_assembling
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
 onready var devices_packed = preload("res://packed/items/Items.tscn")
 var player_is_welding : bool = false
+var player_is_assembling : bool = false
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -19,6 +24,15 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
+	$Room0/AssembleStation.index = 0
+	connect("player_started_assembling", $Room0/AssembleStation, "_on_player_started_assembling")
+	connect("player_stopped_assembling", $Room0/AssembleStation, "_on_player_stopped_assembling")
+	$Room0/AssembleStation2.index = 1
+	connect("player_started_assembling", $Room0/AssembleStation2, "_on_player_started_assembling")
+	connect("player_stopped_assembling", $Room0/AssembleStation2, "_on_player_stopped_assembling")
+	$Room0/AssembleStation3.index = 2
+	connect("player_started_assembling", $Room0/AssembleStation3, "_on_player_started_assembling")
+	connect("player_stopped_assembling", $Room0/AssembleStation3, "_on_player_stopped_assembling")
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -36,15 +50,15 @@ func _process(delta):
 				$Player.drop_item()
 
 		if $Room0/Counter/Area2D.overlaps_body($Player):
-			try_pickup_item(0)
+			try_pickup_item($Room0/Counter)
 		elif $Room0/Counter3/Area2D.overlaps_body($Player):
-			try_pickup_item(1)
+			try_pickup_item($Room0/Counter3)
 		elif $Room0/Counter5/Area2D.overlaps_body($Player):
-			try_pickup_item(2)
+			try_pickup_item($Room0/Counter5)
 		elif $Room0/Counter7/Area2D.overlaps_body($Player):
-			try_pickup_item(3)
+			try_pickup_item($Room0/Counter7)
 		elif $Room0/Counter9/Area2D.overlaps_body($Player):
-			try_pickup_item(4)
+			try_pickup_item($Room0/Counter9)
 		elif $Room0/AssembleStation/Area2D.overlaps_body($Player):
 			try_assemble_station($Room0/AssembleStation)
 		elif $Room0/AssembleStation2/Area2D.overlaps_body($Player):
@@ -64,19 +78,35 @@ func _process(delta):
 				$Room0/WeldingStation.hold_item($Player.held_item)
 				$Player.drop_item()
 			
+			emit_signal("player_started_welding")
 			player_is_welding = true
 			pass # here the progress has to start and tick as long as it is pressed
+		if $Room0/AssembleStation/Area2D.overlaps_body($Player):
+			# TODO: check if it holds correct stuff or no stuff - else explode
+			try_start_to_assemble($Room0/AssembleStation)
+		elif $Room0/AssembleStation2/Area2D.overlaps_body($Player):
+			try_start_to_assemble($Room0/AssembleStation2)
+		elif $Room0/AssembleStation3/Area2D.overlaps_body($Player):
+			try_start_to_assemble($Room0/AssembleStation3)
+		
 	elif Input.is_action_just_released("take_action") && player_is_welding:
+		emit_signal("player_stopped_welding")
+		emit_signal("player_stopped_assembling")
 		player_is_welding = false
+		player_is_assembling = false
 		pass # stop timer - hint on explosion this has to be set also to false
 
 
-func try_pickup_item(var index : int) :
+func try_pickup_item(var counter : KinematicBody2D) :
+	var index = counter.slot_index
 	if $Player.held_item == -1 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
 		var item_index = level_data.customer_slots[index].customer_data.task.device.sprite_index
 		level_data.customer_slots[index].customer_data.task.taskStarted = true
 		$Player.hold_item(item_index)
 		emit_signal("item_picked_up", index)
+	elif $Player.held_item > -1 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
+		counter.hold_item($Player.held_item)
+		$Player.drop_item()
 
 
 func try_assemble_station(var station : KinematicBody2D):
@@ -88,9 +118,16 @@ func try_assemble_station(var station : KinematicBody2D):
 		if station.held_item == -1:
 			station.hold_item($Player.held_item)
 			$Player.drop_item()
-	else: # the held item must be a screw or a display
-		if station.held_item != -1:
-			pass
+	#else: # the held item must be a screw or a display
+	#	if station.held_item != -1:
+			
+	#		emit_signal("player_started_assembling", station.index)
+
+func try_start_to_assemble(var station : KinematicBody2D) -> bool :
+	if $Player.held_item != -1 && (station.held_item == 9 || station.held_item == 10):
+		emit_signal("player_started_assembling", station.inde)
+		return true
+	return false
 
 func _on_start_button_pressed():
 	start()
