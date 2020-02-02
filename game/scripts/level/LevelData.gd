@@ -50,7 +50,7 @@ func _setup_customer_slots() -> void:
 func start() -> void:
 	money = 0
 	happiness = 100
-	cutomerHappiness = 0
+	customerHappiness = 0
 	_setup_customer_slots()
 	isRunning = true
 	emit_signal("money_updated", money)

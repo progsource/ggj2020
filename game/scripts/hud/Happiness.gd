@@ -12,6 +12,6 @@ func _ready():
 		level.level_data.connect("happiness_updated", self, "_on_happiness_updated")
 
 func _on_happiness_updated(var happiness : int):
-	var percentage : float = float(MAX_HAPPINESS) / float(happiness)
+	var percentage : float = float(happiness) / float(MAX_HAPPINESS)
 	var size : float = full_size * percentage
 	$Progress.rect_size.x = size
