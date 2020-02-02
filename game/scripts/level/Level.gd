@@ -187,6 +187,7 @@ func _spawn_customer() -> void :
 	$CustomerSpawnTimer.wait_time = 6
 	var customer_slot = level_data.get_next_free_slot()
 	customer_slot.customer_data = CustomerData.new()
+	customer_slot.customer_data.slot = customer_slot.index
 	customer_slot.customer_data.init_random_values()
 
 	var customer = spawn_customer_packed.instance()
@@ -201,6 +202,7 @@ func _spawn_customer() -> void :
 
 # warning-ignore:unused_argument
 func _despawn_customer(customer_data: CustomerData):
+	counter_stations[customer_data.slot].remove_item()
 	level_data.free_slot(customer_data)
 	$CustomerSpawnTimer.start()
 

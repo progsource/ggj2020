@@ -220,6 +220,7 @@ var task : Task = null
 var base_money : int = 0
 var max_pickup_waiting_time_in_seconds : int = 0
 var max_shipment_time_in_seconds : int = 0
+var slot : int = -1
 
 func init_random_values() -> void:
 	rng.seed = OS.get_ticks_msec()

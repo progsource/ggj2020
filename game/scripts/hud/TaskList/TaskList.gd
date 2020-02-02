@@ -17,15 +17,15 @@ func _on_LevelTimer_level_ended():
 	isRunning = false
 	clear_child_list()
 
-func _on_Task_recieved(task: CustomerData):
+func _on_Task_recieved(customer_data: CustomerData):
 	print(isRunning)
 	if !isRunning:
 		return
 
 	var list = get_child_count()
 	var card = taskCard.instance()
-	card.name = str(task)
-	card.customer_data = task
+	card.name = str(customer_data)
+	card.customer_data = customer_data
 	
 	if list > 1:
 		var lastTask = get_child(list - 1)
