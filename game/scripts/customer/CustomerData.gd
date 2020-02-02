@@ -250,5 +250,7 @@ func _get_random_device() -> int :
 		device_index = rng.randi_range(0, 8)
 		if device_index in GlobalData.currently_in_use_devices:
 			device_index = -1
+	if device_index == -1:
+		device_index = rng.randi_range(0, 9)
 	GlobalData.currently_in_use_devices.push_back(device_index)
 	return device_index

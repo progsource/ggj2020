@@ -15,11 +15,11 @@ func _ready():
 func _process(delta):
 	pass
 
-func hold_item(var index : int, var original_slot_index : int, var is_returned = true):
-	$Items.display(index)
+func hold_item(var device_index : int, var original_slot_index : int, var is_returned = true):
+	$Items.display(device_index)
 	$Items.set_slot(original_slot_index)
 	if is_returned:
-		emit_signal("device_returned", slot_index, index, original_slot_index)
+		emit_signal("device_returned", slot_index, device_index, original_slot_index)
 
 func remove_item():
 	$Items.hide_items()

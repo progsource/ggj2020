@@ -58,6 +58,7 @@ func _process(delta):
 		queue_free()
 
 func display(var item_type : int):
+	assert(item_type < ItemType.size())
 	hide_items()
 	print("make %d visible" % item_type)
 	items[item_type].visible = true

@@ -119,14 +119,14 @@ func _process(delta):
 
 
 func try_pickup_item(var counter : KinematicBody2D) :
-	var index = counter.slot_index
-	if $Player.held_item == -1 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
-		var item_index = level_data.customer_slots[index].customer_data.task.device.sprite_index
-		level_data.customer_slots[index].customer_data.task.taskStarted = true
+	var counter_slot_index = counter.slot_index
+	if $Player.held_item == -1 && level_data.customer_slots[counter_slot_index] && level_data.customer_slots[counter_slot_index].customer_data:
+		var item_index = level_data.customer_slots[counter_slot_index].customer_data.task.device.sprite_index
+		level_data.customer_slots[counter_slot_index].customer_data.task.taskStarted = true
 		counter.remove_item()
-		$Player.hold_item(item_index, index)
-		emit_signal("item_picked_up", index)
-	elif $Player.held_item > -1 && counter.get_sprite_index() < 0 && $Player.held_item < 9 && level_data.customer_slots[index] && level_data.customer_slots[index].customer_data:
+		$Player.hold_item(item_index, counter_slot_index)
+		emit_signal("item_picked_up", counter_slot_index)
+	elif $Player.held_item > -1 && counter.get_sprite_index() < 0 && $Player.held_item < 9 && level_data.customer_slots[counter_slot_index] && level_data.customer_slots[counter_slot_index].customer_data:
 		counter.hold_item($Player.held_item, $Player.get_slot_index())
 		$Player.drop_item()
 

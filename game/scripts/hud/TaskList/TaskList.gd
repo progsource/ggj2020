@@ -12,7 +12,6 @@ func _ready():
 
 func _on_StartButton_start_button_pressed():
 	isRunning = true
-	print("TRIGGER")
 
 func _on_LevelTimer_level_ended():
 	isRunning = false
