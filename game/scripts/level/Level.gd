@@ -45,6 +45,12 @@ func _process(delta):
 			try_pickup_item(3)
 		elif $Room0/Counter9/Area2D.overlaps_body($Player):
 			try_pickup_item(4)
+		elif $Room0/AssembleStation/Area2D.overlaps_body($Player):
+			try_assemble_station($Room0/AssembleStation)
+		elif $Room0/AssembleStation2/Area2D.overlaps_body($Player):
+			try_assemble_station($Room0/AssembleStation2)
+		elif $Room0/AssembleStation3/Area2D.overlaps_body($Player):
+			try_assemble_station($Room0/AssembleStation3)
 
 
 func try_pickup_item(var index : int) :
@@ -53,6 +59,20 @@ func try_pickup_item(var index : int) :
 		level_data.customer_slots[index].customer_data.task.taskStarted = true
 		$Player.hold_item(item_index)
 		emit_signal("item_picked_up", index)
+
+
+func try_assemble_station(var station : KinematicBody2D):
+	if $Player.held_item == -1:
+		if station.held_item != -1:
+			$Player.hold_item(station.held_item)
+			station.remove_item()
+	elif $Player.held_item < 9: # player is holding device
+		if station.held_item == -1:
+			station.hold_item($Player.held_item)
+			$Player.drop_item()
+	else: # the held item must be a screw or a display
+		if station.held_item != -1:
+			pass
 
 func _on_start_button_pressed():
 	start()
