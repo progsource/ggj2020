@@ -82,6 +82,7 @@ func free_slot(customer_data: CustomerData):
 		if customer_slots[i].customer_data == customer_data:
 			handle_reward(customer_data)
 			customer_slots[i] = CustomerSlot.new()
+			customer_slots[i].index = i
 			customer_slots[i].position = customer_slot_positions[i]
 			customer_slots[i].pickup_position = pickup_slot_positions[i]
 			return

@@ -16,4 +16,3 @@ position = Vector2( 128, 162 )
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
 [node name="CustomerSpawnTimer" type="Timer" parent="."]
-wait_time = 6.0

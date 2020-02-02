@@ -27,6 +27,7 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
+		start_button.connect("start_button_pressed", $HUD/TaskList, "_on_start_button_pressed")
 
 	counter_stations.push_back($Room0/Counter)
 	counter_stations.push_back($Room0/Counter3)
@@ -175,7 +176,6 @@ func _on_start_button_pressed():
 func start() -> void :
 	level_data.start()
 	$CustomerSpawnTimer.start()
-	_spawn_customer()
 
 func stop() -> void :
 	level_data.stop()
@@ -184,6 +184,7 @@ func stop() -> void :
 	get_tree().change_scene("res://scenes/splash.tscn")
 
 func _spawn_customer() -> void :
+	$CustomerSpawnTimer.wait_time = 6
 	var customer_slot = level_data.get_next_free_slot()
 	customer_slot.customer_data = CustomerData.new()
 	customer_slot.customer_data.init_random_values()
@@ -196,14 +197,7 @@ func _spawn_customer() -> void :
 	add_child(customer)
 	emit_signal("new_task_added", customer_slot.customer_data)
 
-	#var device = devices_packed.instance()
-	#device.slot = customer_slot.index
-	#device.customer_data = customer_slot.customer_data
-	#device.position = customer_slot.pickup_position
-	#connect("item_picked_up", device, "_on_item_picked_up")
 	counter_stations[customer_slot.index].hold_item(customer_slot.customer_data.task.device.sprite_index, customer_slot.index, false)
-	#add_child(device)
-#	device.display(customer_slot.customer_data.task.device.sprite_index)
 
 # warning-ignore:unused_argument
 func _despawn_customer(customer_data: CustomerData):
