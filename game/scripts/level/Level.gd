@@ -6,6 +6,8 @@ signal player_started_welding
 signal player_stopped_welding
 signal player_started_assembling(assemble_station_index)
 signal player_stopped_assembling
+signal player_started_washing(station_id)
+signal player_stopped_washing
 
 var spawn_customer_packed = preload("res://packed/character/Customer.tscn")
 var level_data := LevelData.new()
@@ -25,16 +27,20 @@ func _ready():
 	if start_button:
 		# warning-ignore:return_value_discarded
 		start_button.connect("start_button_pressed", self, "_on_start_button_pressed")
-		
+
 	assemble_stations.push_back($Room0/AssembleStation)
 	assemble_stations.push_back($Room0/AssembleStation2)
 	assemble_stations.push_back($Room0/AssembleStation3)
-	
+
 	for i in range(assemble_stations.size()):
 		assemble_stations[i].index = i
 		connect("player_started_assembling", assemble_stations[i], "_on_player_started_assembling")
 		connect("player_stopped_assembling", assemble_stations[i], "_on_player_stopped_assembling")
 		assemble_stations[i].connect("assembling_finished", self, "_on_assembling_finished")
+
+	$Room0/WashMachine.index = 0
+	connect("player_started_washing", $Room0/WashMachine, "_on_player_started_washing")
+	connect("player_stopped_washing", $Room0/WashMachine, "_on_player_started_washing")
 
 
 # warning-ignore:unused_argument
@@ -75,12 +81,14 @@ func _process(delta):
 			elif $Player.held_item == -1 && $Room0/WeldingStation.held_item != -1:
 				$Player.hold_item($Room0/WeldingStation.held_item, $Room0/WeldingStation.get_slot_index())
 				$Room0/WeldingStation.remove_item()
+		elif $Room0/WashMachine/Area2D.overlaps_body($player):
+			emit_signal("player_started_washing", 1)
 	elif Input.is_action_just_pressed("take_action"):
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
 				$Player.drop_item()
-			
+
 			emit_signal("player_started_welding")
 			player_is_welding = true
 			pass # here the progress has to start and tick as long as it is pressed
@@ -91,7 +99,7 @@ func _process(delta):
 			try_start_to_assemble($Room0/AssembleStation2)
 		elif $Room0/AssembleStation3/Area2D.overlaps_body($Player):
 			try_start_to_assemble($Room0/AssembleStation3)
-		
+
 	elif Input.is_action_just_released("take_action") && player_is_welding:
 		emit_signal("player_stopped_welding")
 		emit_signal("player_stopped_assembling")
@@ -123,7 +131,7 @@ func try_assemble_station(var station : KinematicBody2D):
 			$Player.drop_item()
 	#else: # the held item must be a screw or a display
 	#	if station.held_item != -1:
-			
+
 	#		emit_signal("player_started_assembling", station.index)
 
 func try_start_to_assemble(var station : KinematicBody2D) -> bool :
@@ -177,4 +185,3 @@ func _on_customer_spawn_timer_timeout():
 
 func _on_assembling_finished(var station_index : int):
 	$Player.drop_item()
-
