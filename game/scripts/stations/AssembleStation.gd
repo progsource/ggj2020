@@ -32,6 +32,8 @@ func _on_player_stopped_assembling(var station_index):
 
 func _on_timeout():
 	left_welding_time -= 1
+	if left_welding_time <= 0:
+		emit_signal("assembling_finished")
 	_update_progress_bar()
 
 func _update_progress_bar():
