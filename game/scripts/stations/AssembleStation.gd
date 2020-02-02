@@ -8,14 +8,16 @@ var index = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+# warning-ignore:return_value_discarded
 	$Timer.connect("timeout", self, "_on_timeout")
 	_update_progress_bar()
 
-func hold_item(var index : int, var slot_index : int):
-	print("%d should be shown" % index)
-	$Items.display(index)
+func hold_item(var item_index : int, var slot_index : int):
+	print("%d should be shown" % item_index)
+	print("from slot %d" % slot_index)
+	$Items.display(item_index)
 	$Items.slot = slot_index
-	held_item = index
+	held_item = item_index
 
 func explode_item():
 	$Items.explode()
