@@ -25,7 +25,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="StationProgressBar" parent="." instance=ExtResource( 2 )]
-position = Vector2( -16, -18 )
+position = Vector2( -16, -24 )
 
 [node name="Items" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, -4 )
