@@ -65,6 +65,7 @@ func _process(delta):
 		return
 
 	if Input.is_action_just_released("ui_accept"):
+		$Player/Inputs.hide_inputs()
 		if $Room0/ScrewCrate/Area2D.overlaps_body($Player):
 			if $Player.held_item == -1:
 				$Player.hold_item(9, -1)
@@ -105,6 +106,7 @@ func _process(delta):
 		elif $Room0/WashMachine/Area2D.overlaps_body($Player):
 			try_washing_machine($Room0/WashMachine)
 	elif Input.is_action_just_pressed("take_action"):
+		$Player/Inputs.hide_inputs()
 		if $Room0/WeldingStation/Area2D.overlaps_body($Player):
 			if $Player.held_item != -1 && $Room0/WeldingStation.held_item == -1:
 				$Room0/WeldingStation.hold_item($Player.held_item, $Player.get_slot_index())
@@ -121,6 +123,7 @@ func _process(delta):
 			try_start_to_assemble($Room0/AssembleStation3)
 
 	elif Input.is_action_just_released("take_action") && (player_is_welding || player_is_assembling):
+		$Player/Inputs.hide_inputs()
 		$Room0/WeldingStation.stop_welding()
 		emit_signal("player_stopped_assembling")
 		player_is_welding = false
@@ -290,4 +293,4 @@ func check_for_input_hint():
 
 func check_node_for_input_hint(node: KinematicBody2D):
 	if node.get_node("Area2D").overlaps_body($Player):
-		node.get_node("Inputs").display(1)
+		$Player/Inputs.display(1)

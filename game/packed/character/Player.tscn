@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/img/pipoya/Female/Female 12-4.png" type="Texture" id=1]
 [ext_resource path="res://scripts/character/Player.gd" type="Script" id=2]
 [ext_resource path="res://packed/items/Items.tscn" type="PackedScene" id=3]
+[ext_resource path="res://packed/input/Inputs.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.50258, 11.1263 )
@@ -116,3 +117,6 @@ position = Vector2( 0, -20 )
 
 [node name="ItemAnimation" type="AnimationPlayer" parent="."]
 anims/item_hover = SubResource( 6 )
+
+[node name="Inputs" parent="." instance=ExtResource( 4 )]
+position = Vector2( 16, -16 )
