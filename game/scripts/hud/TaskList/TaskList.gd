@@ -77,18 +77,23 @@ func TweenComplete(object, key):
 			move_Tasks()
 
 func move_Tasks():
+	var pos = 0
 	for node in self.get_children():
 		if node.get_filename() == taskCard.get_path():
-			tween.interpolate_property(
-				node,
-				"position:x",
-				node.position.x,
-				node.position.x - 35,
-				1,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN_OUT
-			)
-			tween.start()
+			if node.position.x == pos:
+				pos +=35
+			else:
+				tween.interpolate_property(
+					node,
+					"position:x",
+					node.position.x,
+					pos,
+					1,
+					Tween.TRANS_LINEAR,
+					Tween.EASE_IN_OUT
+				)
+				pos += 35
+				tween.start()
 
 func clear_child_list():
 	for node in self.get_children():

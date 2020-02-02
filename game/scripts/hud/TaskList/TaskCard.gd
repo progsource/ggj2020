@@ -11,6 +11,7 @@ func _ready():
 
 	$Devices.display(customer_data.task.device.sprite_index)
 	$TaskTimer.time_for_item = customer_data.task.waitingTime
+	$TaskTimer.start()
 
 # warning-ignore:unused_argument
 func _process(delta):

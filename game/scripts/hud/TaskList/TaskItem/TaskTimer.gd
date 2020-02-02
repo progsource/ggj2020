@@ -2,19 +2,19 @@ extends Node
 
 signal task_expired
 
-export var time_for_item : int = 120
+var time_for_item : int = 120
 var left_time : int = 0
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func start():
 	$ProgressBar.value = 100
 	left_time = time_for_item
 	$Timer.start()
 
 func _on_Timer_timeout():
-	if !$Timer.paused:
-		left_time -= 1
+	left_time -= 1
+
 	# warning-ignore:integer_division
 	$ProgressBar.value = left_time * 100 / time_for_item
 	if left_time == 0:
